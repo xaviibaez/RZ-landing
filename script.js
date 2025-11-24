@@ -309,7 +309,3 @@ inputs.forEach(input => {
         this.style.boxShadow = 'none';
     });
 });
-
-// Console log de bienvenida
-console.log('%c💪 RZ POWER HOUSE - POWERLIFTING GYM 💪', 'color: white; background: black; font-size: 20px; padding: 10px; font-weight: bold;');
-console.log('%cForja tu fuerza con nosotros', 'color: white; font-size: 14px;');
