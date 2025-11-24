@@ -5,7 +5,7 @@ const cursorFollower = document.querySelector('.cursor-follower');
 document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
-    
+
     setTimeout(() => {
         cursorFollower.style.left = (e.clientX - 15) + 'px';
         cursorFollower.style.top = (e.clientY - 15) + 'px';
@@ -19,7 +19,7 @@ interactiveElements.forEach(el => {
         cursor.style.transform = 'scale(2)';
         cursorFollower.style.transform = 'scale(1.5)';
     });
-    
+
     el.addEventListener('mouseleave', () => {
         cursor.style.transform = 'scale(1)';
         cursorFollower.style.transform = 'scale(1)';
@@ -33,14 +33,14 @@ let scrollThreshold = 10;
 
 window.addEventListener('scroll', () => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // Añadir clase scrolled después de 100px
     if (scrollTop > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-    
+
     // Ocultar/mostrar navbar según dirección del scroll
     if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
         if (scrollTop > lastScrollTop && scrollTop > 200) {
@@ -81,7 +81,7 @@ const animateNumbers = () => {
         const duration = 2000;
         const increment = target / (duration / 16);
         let current = 0;
-        
+
         const updateNumber = () => {
             current += increment;
             if (current < target) {
@@ -91,7 +91,7 @@ const animateNumbers = () => {
                 stat.textContent = target + (target === 1000 ? '+' : '');
             }
         };
-        
+
         updateNumber();
     });
 };
@@ -106,7 +106,7 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            
+
             // Animar números solo una vez
             if (entry.target.classList.contains('stats') && !hasAnimated) {
                 animateNumbers();
@@ -135,7 +135,7 @@ const showTestimonial = (index) => {
             card.classList.add('active');
         }
     });
-    
+
     dots.forEach((dot, i) => {
         dot.classList.remove('active');
         if (i === index) {
@@ -171,13 +171,13 @@ setInterval(nextTestimonial, 5000);
 const contactForm = document.querySelector('.contact-form');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     // Animación del botón
     const submitBtn = contactForm.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'ENVIANDO...';
     submitBtn.style.pointerEvents = 'none';
-    
+
     // Simular envío
     setTimeout(() => {
         submitBtn.textContent = '✓ ENVIADO';
@@ -194,7 +194,7 @@ const serviceCards = document.querySelectorAll('.service-card');
 serviceCards.forEach((card, index) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(50px)';
-    
+
     setTimeout(() => {
         card.style.transition = 'all 0.6s ease';
         card.style.opacity = '1';
@@ -254,7 +254,7 @@ statNumbers.forEach(stat => {
         stat.style.transform = 'scale(1.1)';
         stat.style.transition = 'transform 0.3s ease';
     });
-    
+
     stat.addEventListener('mouseleave', () => {
         stat.style.transform = 'scale(1)';
     });
@@ -272,16 +272,16 @@ const createParticle = () => {
     particle.style.left = Math.random() * window.innerWidth + 'px';
     particle.style.top = '-10px';
     particle.style.zIndex = '0';
-    
+
     document.body.appendChild(particle);
-    
+
     let pos = -10;
     const speed = Math.random() * 2 + 1;
-    
+
     const fall = setInterval(() => {
         pos += speed;
         particle.style.top = pos + 'px';
-        
+
         if (pos > window.innerHeight) {
             clearInterval(fall);
             particle.remove();
@@ -299,12 +299,12 @@ setInterval(() => {
 // Efecto de escritura en los inputs del formulario
 const inputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
 inputs.forEach(input => {
-    input.addEventListener('focus', function() {
+    input.addEventListener('focus', function () {
         this.style.transform = 'scale(1.02)';
         this.style.boxShadow = '0 5px 20px rgba(255, 255, 255, 0.1)';
     });
-    
-    input.addEventListener('blur', function() {
+
+    input.addEventListener('blur', function () {
         this.style.transform = 'scale(1)';
         this.style.boxShadow = 'none';
     });
@@ -313,3 +313,27 @@ inputs.forEach(input => {
 // Console log de bienvenida
 console.log('%c💪 RZ POWER HOUSE - POWERLIFTING GYM 💪', 'color: white; background: black; font-size: 20px; padding: 10px; font-weight: bold;');
 console.log('%cForja tu fuerza con nosotros', 'color: white; font-size: 14px;');
+
+// Redirección despues del correo de contacta
+
+const form = document.getElementById('contact-form');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+        await fetch("https://formsubmit.co/rzpowerhouse@gmail.com", {
+            method: "POST",
+            body: formData,
+            mode: "no-cors"
+        });
+
+        // Redirección relativa (localhost o dominio)
+        // window.location.href = "";
+
+    } catch (error) {
+        console.error("Error enviando formulario:", error);
+    }
+});
