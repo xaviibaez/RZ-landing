@@ -703,23 +703,27 @@ html {
 }
 
 .gallery-description {
-    width: 100%;
-    padding: 1rem;
-    background-color: var(--gray-dark);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.154);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--accent-gold);
     opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.4s ease;
+    transition: opacity 0.4s ease;
+    z-index: 3;
 }
 
 .gallery-item:hover .gallery-description {
     opacity: 1;
-    max-height: 100px;
 }
 
 .gallery-description p {
     color: var(--white);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 2px;
     margin: 0;
