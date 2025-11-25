@@ -1028,6 +1028,14 @@ html {
     font-weight: 900;
     letter-spacing: 5px;
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 25%;
+        display: block;
+    }
 }
 
 .footer p {
