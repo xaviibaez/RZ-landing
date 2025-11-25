@@ -109,6 +109,13 @@ html {
     display: flex;
     align-items: center;
     gap: 1rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
 }
 
 @media (max-width: 768px) {
@@ -130,10 +137,6 @@ html {
     .logo-img {
         height: 35px;
     }
-}
-
-.logo-img:hover {
-    transform: scale(1.05);
 }
 
 .nav-menu {
@@ -420,6 +423,7 @@ html {
 .image-placeholder {
     width: 100%;
     aspect-ratio: 4/5;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.15);
     background: linear-gradient(135deg, var(--gray-dark) 0%, var(--gray-light) 100%);
     display: flex;
     align-items: center;
@@ -446,11 +450,6 @@ html {
 
 .hover-lift {
     transition: all 0.5s ease;
-}
-
-.hover-lift:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.15);
 }
 
 .hover-lift:hover::before {
@@ -711,7 +710,7 @@ html {
 }
 
 .gallery-item:hover .gallery-placeholder {
-    transform: scale(1.1);
+    transform: scale(1.01);
 }
 
 .gallery-item:hover .gallery-placeholder::after {

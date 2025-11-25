@@ -280,42 +280,6 @@ statNumbers.forEach(stat => {
     });
 });
 
-// Efecto de partículas en el fondo (opcional - ligero)
-const createParticle = () => {
-    const particle = document.createElement('div');
-    particle.style.position = 'fixed';
-    particle.style.width = '2px';
-    particle.style.height = '2px';
-    particle.style.background = 'white';
-    particle.style.pointerEvents = 'none';
-    particle.style.opacity = '0.5';
-    particle.style.left = Math.random() * window.innerWidth + 'px';
-    particle.style.top = '-10px';
-    particle.style.zIndex = '0';
-    
-    document.body.appendChild(particle);
-    
-    let pos = -10;
-    const speed = Math.random() * 2 + 1;
-    
-    const fall = setInterval(() => {
-        pos += speed;
-        particle.style.top = pos + 'px';
-        
-        if (pos > window.innerHeight) {
-            clearInterval(fall);
-            particle.remove();
-        }
-    }, 30);
-};
-
-// Crear partículas ocasionalmente
-setInterval(() => {
-    if (Math.random() > 0.9) {
-        createParticle();
-    }
-}, 1000);
-
 // Efecto de escritura en los inputs del formulario
 const inputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
 inputs.forEach(input => {
