@@ -108,6 +108,13 @@ html {
     display: flex;
     align-items: center;
     gap: 1rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
 }
 
 @media (max-width: 768px) {
