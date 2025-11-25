@@ -1,15 +1,35 @@
 // Cursor personalizado
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
+console.log('Custom cursor script loaded.');
+// Ocultar cursor personalizado en dispositivos móviles
+const updateCursorVisibility = () => {
+    if (window.innerWidth <= 768) {
+        console.log('No custom cursor on mobile devices.');
+        cursor.style.display = 'none';
+        cursorFollower.style.display = 'none';
+        document.body.style.cursor = 'auto';
+    } else {
+        cursor.style.display = 'block';
+        cursorFollower.style.display = 'block';
+        document.body.style.cursor = 'none';
+    }
+};
+
+// Ejecutar al cargar y al cambiar tamaño de ventana
+updateCursorVisibility();
+window.addEventListener('resize', updateCursorVisibility);
 
 document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-
-    setTimeout(() => {
-        cursorFollower.style.left = (e.clientX - 15) + 'px';
-        cursorFollower.style.top = (e.clientY - 15) + 'px';
-    }, 30);
+    if (window.innerWidth > 768) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        setTimeout(() => {
+            cursorFollower.style.left = (e.clientX - 15) + 'px';
+            cursorFollower.style.top = (e.clientY - 15) + 'px';
+        }, 30);
+    }
 });
 
 // Efecto hover en enlaces y botones
