@@ -207,6 +207,7 @@ html {
 .hero-content {
     text-align: center;
     z-index: 1;
+    padding-top: 6rem;
 }
 
 .hero-title {
