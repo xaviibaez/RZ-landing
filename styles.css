@@ -331,8 +331,7 @@ html {
 
 @keyframes scrollAnimation {
 
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0);
         opacity: 0.5;
     }
@@ -875,6 +874,11 @@ html {
     gap: 2rem;
     height: 100%;
     justify-content: space-between;
+
+    a {
+    text-decoration: none;
+    color: inherit;
+}
 }
 
 .info-item h4 {
@@ -1028,17 +1032,13 @@ html {
 }
 
 .footer-logo {
-    font-size: 2rem;
-    font-weight: 900;
-    letter-spacing: 5px;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
 
     img {
-        width: 25%;
-        display: block;
+        width: 150px;
     }
 }
 
@@ -1098,11 +1098,6 @@ html {
     opacity: 1;
     transform: translateY(0);
 }
-
-a {
-        text-decoration: none;
-        color: inherit;
-    }
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -1271,5 +1266,11 @@ a {
     .container-fluid {
         max-width: 100%;
         padding: 0 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-logo img {
+        width: 100px; 
     }
 }
