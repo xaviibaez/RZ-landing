@@ -309,9 +309,6 @@ form.addEventListener('submit', async (e) => {
             mode: "no-cors"
         });
 
-        // Redirección relativa (localhost o dominio)
-        // window.location.href = "";
-
     } catch (error) {
         console.error("Error enviando formulario:", error);
     }
