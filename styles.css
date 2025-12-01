@@ -1036,10 +1036,10 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    img {
-        width: 150px;
-    }
+.footer-logo-image {
+    width: 150px;
 }
 
 .footer p {
@@ -1201,6 +1201,10 @@ html {
     textarea {
         cursor: pointer;
     }
+
+    .footer-logo-image {
+        width: 100px; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -1266,11 +1270,5 @@ html {
     .container-fluid {
         max-width: 100%;
         padding: 0 0.75rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .footer-logo img {
-        width: 100px; 
     }
 }
