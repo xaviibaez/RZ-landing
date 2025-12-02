@@ -326,6 +326,15 @@ const form = document.getElementById('contact-form');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    // Validar teléfono
+    const telefonoInput = document.getElementById('telefono');
+    const telefono = telefonoInput.value.trim();
+    
+    if (!/^[0-9]{9}$/.test(telefono)) {
+        showNotification('El teléfono debe contener exactamente 9 dígitos.', 'error');
+        return;
+    }
+    
     const submitBtn = form.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'ENVIANDO...';
@@ -334,7 +343,7 @@ form.addEventListener('submit', async (e) => {
     const formData = new FormData(form);
 
     try {
-        const response = await fetch("https://123.co/rzpowerhouse@gmail.com", {
+        const response = await fetch("https://formsubmit.co/rzpowerhouse@gmail.com", {
             method: "POST",
             body: formData,
             headers: {
