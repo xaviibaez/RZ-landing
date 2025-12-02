@@ -753,29 +753,30 @@ html {
 
 .testimonials-slider {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 1.5rem auto 0;
     position: relative;
-    min-height: 300px;
+    height: 450px;
+    display: flex;
+    align-items: center;
 }
 
 .testimonial-card {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     width: 100%;
     padding: 3rem;
     background-color: var(--gray-light);
     border: 2px solid var(--white);
     opacity: 0;
-    transform: translateX(100px);
+    transform: translate(100px, -50%);
     transition: all 0.5s ease;
     pointer-events: none;
 }
 
 .testimonial-card.active {
     opacity: 1;
-    transform: translateX(0);
-    position: relative;
+    transform: translate(0, -50%);
     pointer-events: auto;
 }
 
@@ -1260,6 +1261,10 @@ html {
 
     .testimonial-card {
         padding: 2rem 1.5rem;
+    }
+
+    .testimonials-slider {
+        height: 550px;
     }
 
     .testimonial-text {
