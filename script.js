@@ -310,6 +310,6 @@ form.addEventListener('submit', async (e) => {
         });
 
     } catch (error) {
-        console.error("Error enviando formulario:", error);
+        console.error("Exception on form submit:", error);
     }
 });
