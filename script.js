@@ -294,22 +294,69 @@ inputs.forEach(input => {
     });
 });
 
+// Función para mostrar notificaciones
+function showNotification(message, type = 'error') {
+    const modal = document.getElementById('notification-modal');
+    const messageEl = modal.querySelector('.notification-message');
+    const iconEl = modal.querySelector('.notification-icon');
+    
+    messageEl.textContent = message;
+    iconEl.textContent = type === 'error' ? '✗' : '✓';
+    modal.classList.add('show');
+    modal.classList.remove('error', 'success');
+    modal.classList.add(type);
+    
+    // Auto-ocultar después de 5 segundos
+    setTimeout(() => {
+        modal.classList.remove('show');
+    }, 5000);
+}
+
+// Cerrar modal manualmente
+const closeBtn = document.querySelector('.notification-close');
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        document.getElementById('notification-modal').classList.remove('show');
+    });
+}
+
 // Redirección despues del correo de contacta
 const form = document.getElementById('contact-form');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'ENVIANDO...';
+    submitBtn.disabled = true;
 
     const formData = new FormData(form);
 
     try {
-        await fetch("https://formsubmit.co/rzpowerhouse@gmail.com", {
+        const response = await fetch("https://123.co/rzpowerhouse@gmail.com", {
             method: "POST",
             body: formData,
-            mode: "no-cors"
+            headers: {
+                'Accept': 'application/json'
+            }
         });
-
+        
+        if (response.ok || response.type === 'opaque') {
+            showNotification('¡Mensaje enviado con éxito! Te contactaremos pronto.', 'success');
+            form.reset();
+            submitBtn.textContent = '✓ ENVIADO';
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 3000);
+        } else {
+            throw new Error('Error en el envío');
+        }
     } catch (error) {
         console.error("Exception on form submit:", error);
+        showNotification('Error al enviar el mensaje. Por favor, inténtalo de nuevo o contáctanos directamente.', 'error');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     }
 });
