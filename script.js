@@ -293,3 +293,23 @@ inputs.forEach(input => {
         this.style.boxShadow = 'none';
     });
 });
+
+// Redirección despues del correo de contacta
+const form = document.getElementById('contact-form');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+        await fetch("https://formsubmit.co/rzpowerhouse@gmail.com", {
+            method: "POST",
+            body: formData,
+            mode: "no-cors"
+        });
+
+    } catch (error) {
+        console.error("Error enviando formulario:", error);
+    }
+});
