@@ -326,7 +326,6 @@ const form = document.getElementById('contact-form');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Validar teléfono
     const telefonoInput = document.getElementById('telefono');
     const telefono = telefonoInput.value.trim();
     
