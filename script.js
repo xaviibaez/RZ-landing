@@ -368,3 +368,88 @@ form.addEventListener('submit', async (e) => {
         submitBtn.disabled = false;
     }
 });
+
+if (typeof gtag !== 'undefined') {
+    
+    // 1. Track page view (número de visitas)
+    gtag('event', 'page_load', {
+        'event_category': 'Engagement',
+        'event_label': 'Landing Page Load',
+        'page_location': window.location.href,
+        'page_title': document.title
+    });
+    
+    // 2. Track gallery section view (quien vio la galería)
+    const gallerySection = document.getElementById('gallery');
+    if (gallerySection) {
+        const galleryViewObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gtag('event', 'section_view', {
+                        'event_category': 'Content',
+                        'event_label': 'Gallery Section',
+                        'value': 1
+                    });
+                    galleryViewObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        galleryViewObserver.observe(gallerySection);
+    }
+    
+    // 3. Track products section view (quien vio los productos)
+    const productsSection = document.getElementById('products');
+    if (productsSection) {
+        const productsViewObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gtag('event', 'section_view', {
+                        'event_category': 'Content',
+                        'event_label': 'Products Section',
+                        'value': 1
+                    });
+                    productsViewObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        productsViewObserver.observe(productsSection);
+    }
+    
+    // 4. Track Instagram clicks
+    const instagramLink = document.querySelector('a[href*="instagram.com/rzpowerhouse"]');
+    if (instagramLink) {
+        instagramLink.addEventListener('click', () => {
+            gtag('event', 'instagram_click', {
+                'event_category': 'Social Media',
+                'event_label': 'Instagram Profile',
+                'value': 1
+            });
+        });
+    }
+    
+    // 5. Track TikTok clicks
+    const tiktokLink = document.querySelector('a[href*="tiktok.com/@antonirzpower"]');
+    if (tiktokLink) {
+        tiktokLink.addEventListener('click', () => {
+            gtag('event', 'tiktok_click', {
+                'event_category': 'Social Media',
+                'event_label': 'TikTok Profile',
+                'value': 1
+            });
+        });
+    }
+    
+    // 6. Track YouTube clicks
+    const youtubeLink = document.querySelector('a[href*="youtube.com"]');
+    if (youtubeLink) {
+        youtubeLink.addEventListener('click', () => {
+            gtag('event', 'youtube_click', {
+                'event_category': 'Social Media',
+                'event_label': 'YouTube Channel',
+                'value': 1
+            });
+        });
+    }
+}
