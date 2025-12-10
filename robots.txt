@@ -6,7 +6,7 @@ Allow: /
 Disallow: /assets/videos/
 
 # Sitemap location
-Sitemap: https://rzpowerhouse.com/sitemap.xml
+Sitemap: https://rz-landing.vercel.app/sitemap.xml
 
 # Crawl delay (optional, helps with server load)
 Crawl-delay: 1
