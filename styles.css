@@ -216,7 +216,6 @@ html {
 .carousel-close:hover {
     background-color: var(--accent-red);
     border-color: var(--accent-red);
-    transform: rotate(90deg);
 }
 
 .carousel-btn {
@@ -757,7 +756,7 @@ html {
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.2) rotate(180deg);
+    transform: scale(1.2);
 }
 
 .service-card h3 {
@@ -1203,9 +1202,7 @@ html {
     transition: transform 0.3s ease;
 }
 
-.github-link:hover svg {
-    transform: rotate(360deg);
-}
+
 
 /* Animaciones de Scroll */
 .reveal-text {
