@@ -298,9 +298,22 @@ function closeCarousel() {
 // Función para actualizar la imagen del carrusel
 function updateCarouselImage() {
     const currentImage = currentCarouselImages[currentCarouselIndex];
-    carouselImage.src = currentImage.src;
-    carouselImage.alt = currentImage.alt;
-    carouselCounter.textContent = `${currentCarouselIndex + 1} / ${currentCarouselImages.length}`;
+    
+    // Animación de salida
+    carouselImage.style.opacity = '0';
+    carouselImage.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+        carouselImage.src = currentImage.src;
+        carouselImage.alt = currentImage.alt;
+        carouselCounter.textContent = `${currentCarouselIndex + 1} / ${currentCarouselImages.length}`;
+        
+        // Animación de entrada
+        setTimeout(() => {
+            carouselImage.style.opacity = '1';
+            carouselImage.style.transform = 'scale(1)';
+        }, 50);
+    }, 200);
     
     // Actualizar estado de los botones
     carouselPrev.disabled = currentCarouselIndex === 0;
@@ -352,6 +365,38 @@ document.querySelectorAll('.gallery-item').forEach((item, index) => {
         openCarousel(galleryType, itemIndex);
     });
 });
+
+// Soporte táctil para navegación del carrusel en móviles
+let touchStartX = 0;
+let touchEndX = 0;
+
+carouselModal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, false);
+
+carouselModal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, false);
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe izquierda - siguiente imagen
+            if (currentCarouselIndex < currentCarouselImages.length - 1) {
+                carouselNext.click();
+            }
+        } else {
+            // Swipe derecha - imagen anterior
+            if (currentCarouselIndex > 0) {
+                carouselPrev.click();
+            }
+        }
+    }
+}
 
 // Función para mostrar notificaciones
 function showNotification(message, type = 'error') {
