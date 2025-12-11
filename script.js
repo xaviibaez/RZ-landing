@@ -294,21 +294,8 @@ carouselNext.addEventListener('click', () => {
     }
 });
 
-// Navegación con teclado
-document.addEventListener('keydown', (e) => {
-    if (carouselModal.classList.contains('show')) {
-        if (e.key === 'Escape') {
-            closeCarousel();
-        } else if (e.key === 'ArrowLeft') {
-            carouselPrev.click();
-        } else if (e.key === 'ArrowRight') {
-            carouselNext.click();
-        }
-    }
-});
-
 // Agregar eventos de clic a los items de la galería
-document.querySelectorAll('.gallery-item').forEach((item, index) => {
+document.querySelectorAll('.gallery-item').forEach((item) => {
     item.addEventListener('click', () => {
         const galleryType = item.getAttribute('data-gallery');
         const parentSection = item.closest('section');
