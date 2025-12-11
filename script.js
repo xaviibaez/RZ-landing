@@ -1,51 +1,3 @@
-// Cursor personalizado
-const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
-console.log('Custom cursor script loaded.');
-// Ocultar cursor personalizado en dispositivos móviles
-const updateCursorVisibility = () => {
-    if (window.innerWidth <= 768) {
-        console.log('No custom cursor on mobile devices.');
-        cursor.style.display = 'none';
-        cursorFollower.style.display = 'none';
-        document.body.style.cursor = 'auto';
-    } else {
-        cursor.style.display = 'block';
-        cursorFollower.style.display = 'block';
-        document.body.style.cursor = 'none';
-    }
-};
-
-// Ejecutar al cargar y al cambiar tamaño de ventana
-updateCursorVisibility();
-window.addEventListener('resize', updateCursorVisibility);
-
-document.addEventListener('mousemove', (e) => {
-    if (window.innerWidth > 768) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        setTimeout(() => {
-            cursorFollower.style.left = (e.clientX - 15) + 'px';
-            cursorFollower.style.top = (e.clientY - 15) + 'px';
-        }, 30);
-    }
-});
-
-// Efecto hover en enlaces y botones
-const interactiveElements = document.querySelectorAll('a, button, .service-card, .gallery-item');
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(2)';
-        cursorFollower.style.transform = 'scale(1.5)';
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursorFollower.style.transform = 'scale(1)';
-    });
-});
-
 // Navegación scroll con ocultamiento
 const navbar = document.querySelector('.navbar');
 let lastScrollTop = 0;
@@ -250,6 +202,140 @@ inputs.forEach(input => {
         this.style.boxShadow = 'none';
     });
 });
+
+// Carrusel de imágenes en modal
+const carouselModal = document.getElementById('carousel-modal');
+const carouselImage = document.querySelector('.carousel-image');
+const carouselCounter = document.querySelector('.carousel-counter');
+const carouselClose = document.querySelector('.carousel-close');
+const carouselPrev = document.querySelector('.carousel-prev');
+const carouselNext = document.querySelector('.carousel-next');
+
+let currentCarouselIndex = 0;
+let currentCarouselImages = [];
+
+// Datos de las imágenes por galería
+const galleryImages = {
+    gymTrainingZone: [
+        { src: './assets/images/1.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
+        { src: './assets/images/2.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
+        { src: './assets/images/2.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
+    ],
+    gym: [
+        { src: './assets/images/1.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
+        { src: './assets/images/2.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
+        { src: './assets/images/3.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
+    ],
+    productsTshirts: [
+        { src: './assets/images/products/1.jpg', alt: 'Cinturones de levantamiento profesionales para powerlifting' },
+        { src: './assets/images/products/2.jpg', alt: 'Muñequeras profesionales para press de banca y levantamiento' }
+    ]
+};
+
+// Función para abrir el carrusel
+function openCarousel(galleryType, startIndex) {
+    currentCarouselImages = galleryImages[galleryType];
+    currentCarouselIndex = startIndex;
+    updateCarouselImage();
+    carouselModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// Función para cerrar el carrusel
+function closeCarousel() {
+    carouselModal.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+// Función para actualizar la imagen del carrusel
+function updateCarouselImage() {
+    const currentImage = currentCarouselImages[currentCarouselIndex];
+    
+    // Animación de salida
+    carouselImage.style.opacity = '0';
+    carouselImage.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+        carouselImage.src = currentImage.src;
+        carouselImage.alt = currentImage.alt;
+        carouselCounter.textContent = `${currentCarouselIndex + 1} / ${currentCarouselImages.length}`;
+        
+        // Animación de entrada
+        setTimeout(() => {
+            carouselImage.style.opacity = '1';
+            carouselImage.style.transform = 'scale(1)';
+        }, 50);
+    }, 200);
+    
+    // Actualizar estado de los botones
+    carouselPrev.disabled = currentCarouselIndex === 0;
+    carouselNext.disabled = currentCarouselIndex === currentCarouselImages.length - 1;
+}
+
+// Event listeners del carrusel
+carouselClose.addEventListener('click', closeCarousel);
+carouselModal.addEventListener('click', (e) => {
+    if (e.target === carouselModal) {
+        closeCarousel();
+    }
+});
+
+carouselPrev.addEventListener('click', () => {
+    if (currentCarouselIndex > 0) {
+        currentCarouselIndex--;
+        updateCarouselImage();
+    }
+});
+
+carouselNext.addEventListener('click', () => {
+    if (currentCarouselIndex < currentCarouselImages.length - 1) {
+        currentCarouselIndex++;
+        updateCarouselImage();
+    }
+});
+
+// Agregar eventos de clic a los items de la galería
+document.querySelectorAll('.gallery-item').forEach((item) => {
+    item.addEventListener('click', () => {
+        const galleryType = item.getAttribute('data-gallery');
+        const parentSection = item.closest('section');
+        const sectionItems = Array.from(parentSection.querySelectorAll(`.gallery-item[data-gallery="${galleryType}"]`));
+        const itemIndex = sectionItems.indexOf(item);
+        openCarousel(galleryType, itemIndex);
+    });
+});
+
+// Soporte táctil para navegación del carrusel en móviles
+let touchStartX = 0;
+let touchEndX = 0;
+
+carouselModal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, false);
+
+carouselModal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, false);
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe izquierda - siguiente imagen
+            if (currentCarouselIndex < currentCarouselImages.length - 1) {
+                carouselNext.click();
+            }
+        } else {
+            // Swipe derecha - imagen anterior
+            if (currentCarouselIndex > 0) {
+                carouselPrev.click();
+            }
+        }
+    }
+}
 
 // Función para mostrar notificaciones
 function showNotification(message, type = 'error') {
