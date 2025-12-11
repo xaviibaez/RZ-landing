@@ -251,6 +251,108 @@ inputs.forEach(input => {
     });
 });
 
+// Carrusel de imágenes en modal
+const carouselModal = document.getElementById('carousel-modal');
+const carouselImage = document.querySelector('.carousel-image');
+const carouselCounter = document.querySelector('.carousel-counter');
+const carouselClose = document.querySelector('.carousel-close');
+const carouselPrev = document.querySelector('.carousel-prev');
+const carouselNext = document.querySelector('.carousel-next');
+
+let currentCarouselIndex = 0;
+let currentCarouselImages = [];
+
+// Datos de las imágenes por galería
+const galleryImages = {
+    gymTrainingZone: [
+        { src: './assets/images/1.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
+        { src: './assets/images/2.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
+        { src: './assets/images/2.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
+    ],
+    gym: [
+        { src: './assets/images/1.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
+        { src: './assets/images/2.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
+        { src: './assets/images/3.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
+    ],
+    productsTshirts: [
+        { src: './assets/images/products/1.jpg', alt: 'Cinturones de levantamiento profesionales para powerlifting' },
+        { src: './assets/images/products/2.jpg', alt: 'Muñequeras profesionales para press de banca y levantamiento' }
+    ]
+};
+
+// Función para abrir el carrusel
+function openCarousel(galleryType, startIndex) {
+    currentCarouselImages = galleryImages[galleryType];
+    currentCarouselIndex = startIndex;
+    updateCarouselImage();
+    carouselModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// Función para cerrar el carrusel
+function closeCarousel() {
+    carouselModal.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+// Función para actualizar la imagen del carrusel
+function updateCarouselImage() {
+    const currentImage = currentCarouselImages[currentCarouselIndex];
+    carouselImage.src = currentImage.src;
+    carouselImage.alt = currentImage.alt;
+    carouselCounter.textContent = `${currentCarouselIndex + 1} / ${currentCarouselImages.length}`;
+    
+    // Actualizar estado de los botones
+    carouselPrev.disabled = currentCarouselIndex === 0;
+    carouselNext.disabled = currentCarouselIndex === currentCarouselImages.length - 1;
+}
+
+// Event listeners del carrusel
+carouselClose.addEventListener('click', closeCarousel);
+carouselModal.addEventListener('click', (e) => {
+    if (e.target === carouselModal) {
+        closeCarousel();
+    }
+});
+
+carouselPrev.addEventListener('click', () => {
+    if (currentCarouselIndex > 0) {
+        currentCarouselIndex--;
+        updateCarouselImage();
+    }
+});
+
+carouselNext.addEventListener('click', () => {
+    if (currentCarouselIndex < currentCarouselImages.length - 1) {
+        currentCarouselIndex++;
+        updateCarouselImage();
+    }
+});
+
+// Navegación con teclado
+document.addEventListener('keydown', (e) => {
+    if (carouselModal.classList.contains('show')) {
+        if (e.key === 'Escape') {
+            closeCarousel();
+        } else if (e.key === 'ArrowLeft') {
+            carouselPrev.click();
+        } else if (e.key === 'ArrowRight') {
+            carouselNext.click();
+        }
+    }
+});
+
+// Agregar eventos de clic a los items de la galería
+document.querySelectorAll('.gallery-item').forEach((item, index) => {
+    item.addEventListener('click', () => {
+        const galleryType = item.getAttribute('data-gallery');
+        const parentSection = item.closest('section');
+        const sectionItems = Array.from(parentSection.querySelectorAll(`.gallery-item[data-gallery="${galleryType}"]`));
+        const itemIndex = sectionItems.indexOf(item);
+        openCarousel(galleryType, itemIndex);
+    });
+});
+
 // Función para mostrar notificaciones
 function showNotification(message, type = 'error') {
     const modal = document.getElementById('notification-modal');

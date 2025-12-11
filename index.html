@@ -130,6 +130,19 @@
         </div>
     </div>
 
+    <!-- Modal de Carrusel de Imágenes -->
+    <div id="carousel-modal" class="carousel-modal">
+        <div class="carousel-modal-content">
+            <button class="carousel-close" aria-label="Cerrar carrusel">×</button>
+            <button class="carousel-btn carousel-prev">❮</button>
+            <div class="carousel-image-container">
+                <img src="" alt="" class="carousel-image" loading="lazy">
+                <div class="carousel-counter"></div>
+            </div>
+            <button class="carousel-btn carousel-next">❯</button>
+        </div>
+    </div>
+
     <!-- Cursor personalizado -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -263,7 +276,7 @@
         <div class="container-fluid">
             <h2 class="section-title reveal-text center">EL TEMPLO</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gymTrainingZone">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/1.jpg" alt="Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko" class="gallery-img" loading="lazy">
                     </div>
@@ -271,7 +284,7 @@
                         <p>Zona de Entrenamiento</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/2.jpg" alt="Estación de press de banca con equipamiento profesional para powerlifting" class="gallery-img" loading="lazy">
                     </div>
@@ -279,7 +292,7 @@
                         <p>Press de Banca</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/3.jpg" alt="Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting" class="gallery-img" loading="lazy">
                     </div>
@@ -287,7 +300,7 @@
                         <p>Racks de Sentadilla</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/3.jpg" alt="Equipamiento elite Eleiko para competición de powerlifting" class="gallery-img" loading="lazy">
                     </div>
@@ -295,7 +308,7 @@
                         <p>Equipamiento Elite</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/2.jpg" alt="Comunidad de powerlifters entrenando juntos en RZ Power House Sabadell" class="gallery-img" loading="lazy">
                     </div>
@@ -312,7 +325,7 @@
         <div class="container-fluid">
             <h2 class="section-title reveal-text center">PRODUCTOS</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gymTrainingZone">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/products/1.jpg" alt="Cinturones de levantamiento profesionales para powerlifting" class="gallery-img" loading="lazy">
                     </div>
@@ -320,7 +333,7 @@
                         <p>Cinturones de Levantamiento</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="productsTshirts">
                     <div class="gallery-placeholder">
                         <img src="./assets/images/products/1.jpg" alt="Muñequeras profesionales para press de banca y levantamiento" class="gallery-img" loading="lazy">
                     </div>
