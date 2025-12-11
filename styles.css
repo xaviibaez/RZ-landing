@@ -29,7 +29,6 @@ body {
     background-color: var(--black);
     color: var(--white);
     overflow-x: hidden;
-    cursor: none;
     max-width: 100vw;
 }
 
@@ -299,32 +298,6 @@ html {
     }
 }
 
-/* Cursor Personalizado */
-.cursor,
-.cursor-follower {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--white);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    transition: all 0.1s ease;
-    mix-blend-mode: difference;
-}
-
-.cursor {
-    width: 10px;
-    height: 10px;
-    background-color: var(--white);
-}
-
-.cursor-follower {
-    width: 40px;
-    height: 40px;
-    transition: all 0.1s ease;
-}
-
 /* Navegación */
 .navbar {
     position: fixed;
@@ -366,7 +339,6 @@ html {
     font-size: 1.5rem;
     font-weight: 900;
     letter-spacing: 3px;
-    cursor: none;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -413,7 +385,6 @@ html {
     letter-spacing: 2px;
     position: relative;
     transition: all 0.3s ease;
-    cursor: none;
 }
 
 .nav-link::after {
@@ -435,7 +406,6 @@ html {
     display: none;
     flex-direction: column;
     gap: 5px;
-    cursor: none;
 }
 
 .hamburger span {
@@ -539,7 +509,6 @@ html {
     transition: all 0.3s ease;
     opacity: 0;
     animation: fadeIn 1s ease 1.2s forwards;
-    cursor: none;
 }
 
 .cta-button::before {
@@ -613,7 +582,6 @@ html {
     letter-spacing: 5px;
     position: relative;
     overflow: hidden;
-    cursor: none;
     border-radius: 8px;
 }
 
@@ -756,7 +724,6 @@ html {
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
-    cursor: none;
 }
 
 .service-card::before {
@@ -837,12 +804,6 @@ html {
 
 .gallery-item:hover {
     transform: translateY(-5px);
-}
-
-@media (min-width: 769px) {
-    .gallery-item {
-        cursor: none;
-    }
 }
 
 .gallery-placeholder {
@@ -990,7 +951,6 @@ html {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
-    cursor: none;
     transition: all 0.3s ease;
 }
 
@@ -1011,7 +971,6 @@ html {
     border-radius: 50%;
     background-color: var(--gray-light);
     border: 2px solid var(--white);
-    cursor: none;
     transition: all 0.3s ease;
 }
 
@@ -1086,7 +1045,6 @@ html {
     padding: 0.5rem 1rem;
     border: 2px solid var(--gray-light);
     transition: all 0.3s ease;
-    cursor: none;
 }
 
 .social-link:hover {
@@ -1139,7 +1097,6 @@ html {
     font-size: 1rem;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    cursor: none;
 }
 
 .form-group textarea {
@@ -1166,7 +1123,6 @@ html {
     border: none;
     font-weight: 900;
     letter-spacing: 3px;
-    cursor: none;
     transition: color 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -1240,7 +1196,6 @@ html {
     padding: 0.5rem 1rem;
     border: 2px solid var(--gray-light);
     transition: all 0.3s ease;
-    cursor: none;
 }
 
 .github-link:hover {
@@ -1373,23 +1328,6 @@ html {
     .social-link {
         width: 100%;
         justify-content: center;
-    }
-
-    .cursor,
-    .cursor-follower {
-        display: none;
-    }
-
-    body {
-        cursor: auto;
-    }
-
-    a,
-    button,
-    input,
-    select,
-    textarea {
-        cursor: pointer;
     }
 
     .footer-logo-image {
