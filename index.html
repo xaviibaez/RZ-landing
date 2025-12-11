@@ -31,8 +31,8 @@
 
     <!-- Preload Critical Resources -->
     <link rel="preload" as="video" href="./assets/videos/hero.mp4">
-    <link rel="preload" as="image" href="./assets/images/logoRzPowerHouseNegativo.png">
-    
+    <link rel="preload" as="image" href="./assets/images/rz-powerhouse-logo-negative.png">
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -42,9 +42,7 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WDQTLBXQ1"></script>
@@ -61,7 +59,7 @@
       "@context": "https://schema.org",
       "@type": "SportsActivityLocation",
       "name": "RZ Power House",
-      "image": "https://rz-landing.vercel.app/assets/images/logoRzPowerHouseNegativo.png",
+      "image": "https://rz-landing.vercel.app/assets/images/rz-powerhouse-logo-negative.png",
       "description": "Gimnasio especializado en Powerlifting, Strongman y Halterofilia en Sabadell. Equipamiento Eleiko de competición, entrenadores certificados y comunidad apasionada.",
       "address": {
         "@type": "PostalAddress",
@@ -147,7 +145,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#hero" class="logo">
-                <img src="./assets/images/logoRzPowerHouseNegativo.png" alt="RZ Power House - Gimnasio Powerlifting Sabadell" class="logo-img">                
+                <img src="./assets/images/rz-powerhouse-logo-negative.png" alt="RZ Power House - Gimnasio Powerlifting Sabadell" class="logo-img">
             </a>
             <ul class="nav-menu">
                 <li><a href="#hero" class="nav-link">Inicio</a></li>
@@ -168,12 +166,13 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./assets/images/hero-poster.jpg">
+            <source src="./assets/videos/hero.webm" type="video/webm">
             <source src="./assets/videos/hero.mp4" type="video/mp4">
         </video>
         <div class="hero-content">
             <h1 class="hero-title">
-                <span class="word">ENAMORATE</span>
+                <span class="word">ENAMÓRATE</span>
                 <span class="word">DEL</span>
                 <span class="word">PROCESO</span>
             </h1>
@@ -220,7 +219,13 @@
                 </div>
                 <div class="about-image">
                     <div class="image-placeholder hover-lift">
-                        <img src="./assets/images/liftingExample.jpg" alt="Atleta realizando sentadilla profunda con barra olímpica en RZ Power House Sabadell" class="about-img" loading="lazy">
+
+                        <picture>
+                            <source srcset="./assets/images/about/lifting-example.avif" type="image/avif">
+                            <source srcset="./assets/images/about/lifting-example.webp" type="image/webp">
+                            <img src="./assets/images/about/lifting-example.jpg" alt="Atleta realizando sentadilla profunda con barra olímpica en RZ Power House Sabadell" class="about-img" loading="lazy" width="800" height="1000">
+                        </picture>
+
                         <div class="image-overlay"></div>
                     </div>
                 </div>
@@ -274,7 +279,11 @@
             <div class="gallery-grid">
                 <div class="gallery-item" data-gallery="gymTrainingZone">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/1.jpg" alt="Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/gallery/training-zone.avif" type="image/avif">
+                            <source srcset="./assets/images/gallery/training-zone.webp" type="image/webp">
+                            <img src="./assets/images/gallery/training-zone.jpg" alt="Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Zona de Entrenamiento</p>
@@ -282,7 +291,11 @@
                 </div>
                 <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/2.jpg" alt="Estación de press de banca con equipamiento profesional para powerlifting" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/gallery/bench-press.avif" type="image/avif">
+                            <source srcset="./assets/images/gallery/bench-press.webp" type="image/webp">
+                            <img src="./assets/images/gallery/bench-press.jpg" alt="Estación de press de banca con equipamiento profesional para powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Press de Banca</p>
@@ -290,7 +303,11 @@
                 </div>
                 <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/3.jpg" alt="Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/gallery/dumbbell-rack.avif" type="image/avif">
+                            <source srcset="./assets/images/gallery/dumbbell-rack.webp" type="image/webp">
+                            <img src="./assets/images/gallery/dumbbell-rack.jpg" alt="Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Racks de Sentadilla</p>
@@ -298,7 +315,11 @@
                 </div>
                 <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/3.jpg" alt="Equipamiento elite Eleiko para competición de powerlifting" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/gallery/lateral-raises-dumbbells.avif" type="image/avif">
+                            <source srcset="./assets/images/gallery/lateral-raises-dumbbells.webp" type="image/webp">
+                            <img src="./assets/images/gallery/lateral-raises-dumbbells.jpg" alt="Equipamiento elite Eleiko para competición de powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Equipamiento Elite</p>
@@ -306,7 +327,11 @@
                 </div>
                 <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/2.jpg" alt="Comunidad de powerlifters entrenando juntos en RZ Power House Sabadell" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/gallery/trust-the-process.avif" type="image/avif">
+                            <source srcset="./assets/images/gallery/trust-the-process.webp" type="image/webp">
+                            <img src="./assets/images/gallery/trust-the-process.jpg" alt="Comunidad de powerlifters entrenando juntos en RZ Power House Sabadell" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Nuestra Comunidad</p>
@@ -323,7 +348,11 @@
             <div class="gallery-grid">
                 <div class="gallery-item" data-gallery="gymTrainingZone">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/products/1.jpg" alt="Cinturones de levantamiento profesionales para powerlifting" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/products/hoodie1.avif" type="image/avif">
+                            <source srcset="./assets/images/products/hoodie1.webp" type="image/webp">
+                            <img src="./assets/images/products/hoodie1.jpg" alt="Muñequeras profesionales para press de banca y levantamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Cinturones de Levantamiento</p>
@@ -331,7 +360,11 @@
                 </div>
                 <div class="gallery-item" data-gallery="productsTshirts">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/products/1.jpg" alt="Muñequeras profesionales para press de banca y levantamiento" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/products/sleeveless-t-shirt.avif" type="image/avif">
+                            <source srcset="./assets/images/products/sleeveless-t-shirt.webp" type="image/webp">
+                            <img src="./assets/images/products/sleeveless-t-shirt.jpg" alt="Zona de Entrenamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Muñequeras Profesionales</p>
@@ -339,7 +372,11 @@
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/products/1.jpg" alt="Rodilleras de competición para sentadilla powerlifting" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/products/sweat-suit.avif" type="image/avif">
+                            <source srcset="./assets/images/products/sweat-suit.webp" type="image/webp">
+                            <img src="./assets/images/products/sweat-suit.jpg" alt="Rodilleras de competición para sentadilla powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Rodilleras de Competición</p>
@@ -347,7 +384,11 @@
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/products/1.jpg" alt="Tiza líquida y accesorios para entrenamiento de fuerza" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/products/t-shirt.avif" type="image/avif">
+                            <source srcset="./assets/images/products/t-shirt.webp" type="image/webp">
+                            <img src="./assets/images/products/t-shirt.jpg" alt="Tiza líquida y accesorios para entrenamiento de fuerza" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Tiza y Accesorios</p>
@@ -355,7 +396,11 @@
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-placeholder">
-                        <img src="./assets/images/products/1.jpg" alt="Merchandising oficial RZ Power House camisetas y sudaderas" class="gallery-img" loading="lazy">
+                        <picture>
+                            <source srcset="./assets/images/products/t-shirt.avif" type="image/avif">
+                            <source srcset="./assets/images/products/t-shirt.webp" type="image/webp">
+                            <img src="./assets/images/products/t-shirt.jpg" alt="Merchandising oficial RZ Power House camisetas y sudaderas" class="gallery-img" loading="lazy" width="400" height="400">
+                        </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Merchandising RZ</p>
@@ -519,7 +564,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img class="footer-logo-image" src="./assets/images/logoRzPowerHouseNegativo.png" alt="RZ Power House - Gimnasio Powerlifting Sabadell" loading="lazy">
+                    <img class="footer-logo-image" src="./assets/images/rz-powerhouse-logo-negative.png" alt="RZ Power House - Gimnasio Powerlifting Sabadell">
                 </div>
 
                 <p>&copy; 2025 RZ Power House Powerlifting Gym Sabadell. Todos los derechos reservados.</p>
