@@ -4,8 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RZ POWER HOUSE - Powerlifting Gym</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>RZ POWER HOUSE - Gimnasio Powerlifting Sabadell | Abierto 24h</title>
+    <meta name="description" content="RZ Power House - Gimnasio especializado en Powerlifting en Sabadell. Equipamiento Eleiko, entrenadores profesionales, abierto 24h. Powerlifting, Strongman y Halterofilia. ¡Primera sesión gratis!">
+    <meta name="keywords" content="powerlifting sabadell, gimnasio powerlifting, strongman sabadell, halterofilia, gym 24 horas sabadell, eleiko, entrenamiento fuerza, powerlifting barcelona, gimnasio sabadell, rz power house">
+    <meta name="author" content="RZ Power House">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://rz-landing.vercel.app">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="RZ Power House: ¡El Templo del Powerlifting! 🏋️" />
+    <meta property="og:description" content="Entrena fuerza de verdad: Powerlifting, Halterofilia y Entrenamientos Personalizados. ¡Tu PR te espera aquí!" />
+    <meta property="og:url" content="https://rz-landing.vercel.app/" />
+    <meta property="og:image" content="https://rz-landing.vercel.app/assets/images/openGraph.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RZ Power House" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://rz-landing.vercel.app">
+    <meta name="twitter:title" content="RZ POWER HOUSE - Powerlifting Gym Sabadell">
+    <meta name="twitter:description" content="El templo del Powerlifting en Sabadell. Equipamiento elite, entrenadores profesionales, abierto 24h. Primera sesión gratis.">
+    <meta name="twitter:image" content="https://rz-landing.vercel.app/assets/images/openGraph.jpg">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" as="video" href="./assets/videos/hero.mp4">
+    <link rel="preload" as="image" href="./assets/images/logoRzPowerHouseNegativo.png">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://formsubmit.co">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WDQTLBXQ1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6WDQTLBXQ1');
+    </script>
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "name": "RZ Power House",
+      "image": "https://rz-landing.vercel.app/assets/images/logoRzPowerHouseNegativo.png",
+      "description": "Gimnasio especializado en Powerlifting, Strongman y Halterofilia en Sabadell. Equipamiento Eleiko de competición, entrenadores certificados y comunidad apasionada.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrer de Permanyer, 316",
+        "addressLocality": "Sabadell",
+        "addressRegion": "Barcelona",
+        "postalCode": "08205",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "41.54129226104633",
+        "longitude": "2.099175290292432"
+      },
+      "url": "https://rz-landing.vercel.app",
+      "telephone": "+34677624775",
+      "email": "rzpowerhouse@gmail.com",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "priceRange": "€€",
+      "sameAs": [
+        "https://www.instagram.com/rzpowerhouse/",
+        "https://www.tiktok.com/@antonirzpower",
+        "https://www.youtube.com/channel/UCJrHJodMPMHErA3_szj_UMQ"
+      ],
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Equipamiento Eleiko",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Entrenadores Certificados",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Abierto 24 horas",
+          "value": true
+        }
+      ]
+    }
+    </script>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 
@@ -19,15 +131,24 @@
         </div>
     </div>
 
-    <!-- Cursor personalizado -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Modal de Carrusel de Imágenes -->
+    <div id="carousel-modal" class="carousel-modal">
+        <div class="carousel-modal-content">
+            <button class="carousel-close" aria-label="Cerrar carrusel">×</button>
+            <button class="carousel-btn carousel-prev">❮</button>
+            <div class="carousel-image-container">
+                <img src="" alt="" class="carousel-image" loading="lazy">
+                <div class="carousel-counter"></div>
+            </div>
+            <button class="carousel-btn carousel-next">❯</button>
+        </div>
+    </div>
 
     <!-- Navegación -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#hero" class="logo">
-                <img src="./assets/images/rz-powerhouse-logo-negative.png" alt="RZ Power House Logo" class="logo-img">                
+                <img src="./assets/images/rz-powerhouse-logo-negative.png" alt="RZ Power House - Gimnasio Powerlifting Sabadell" class="logo-img">                
             </a>
             <ul class="nav-menu">
                 <li><a href="#hero" class="nav-link">Inicio</a></li>
@@ -60,30 +181,6 @@
             </h1>
             <p class="hero-subtitle">EL TEMPLO DEL POWERLIFTING</p>
             <a href="#contact" class="cta-button">ÚNETE AHORA</a>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3 class="stat-number" data-target="500">0</h3>
-                    <p>Miembros Activos</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-number" data-target="15">0</h3>
-                    <p>Entrenadores Pro</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-number" data-target="1000">0</h3>
-                    <p>KG Levantados</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-number" data-target="24">0</h3>
-                    <p>Horas Abiertas</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -129,7 +226,7 @@
                         <picture>
                             <source srcset="./assets/images/about/lifting-example.avif" type="image/avif">
                             <source srcset="./assets/images/about/lifting-example.webp" type="image/webp">
-                            <img src="./assets/images/about/lifting-example.jpg" alt="Atleta realizando peso muerto en competición oficial" class="about-img" loading="lazy" width="800" height="1000">
+                            <img src="./assets/images/about/lifting-example.jpg" alt="Atleta realizando sentadilla profunda con barra olímpica en RZ Power House Sabadell" class="about-img" loading="lazy" width="800" height="1000">
                         </picture>
                         
                         <div class="image-overlay"></div>
@@ -183,60 +280,60 @@
         <div class="container-fluid">
             <h2 class="section-title reveal-text center">EL TEMPLO</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gymTrainingZone">
                     <div class="gallery-placeholder">
                         <picture>
                             <source srcset="./assets/images/gallery/training-zone.avif" type="image/avif">
                             <source srcset="./assets/images/gallery/training-zone.webp" type="image/webp">
-                            <img src="./assets/images/gallery/training-zone.jpg" alt="Zona de Entrenamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/gallery/training-zone.jpg" alt="Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture>  
                     </div>
                     <div class="gallery-description">
                         <p>Zona de Entrenamiento</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <picture>
                             <source srcset="./assets/images/gallery/bench-press.avif" type="image/avif">
                             <source srcset="./assets/images/gallery/bench-press.webp" type="image/webp">
-                            <img src="./assets/images/gallery/bench-press.jpg" alt="Rack de competición" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/gallery/bench-press.jpg" alt="Estación de press de banca con equipamiento profesional para powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Press de Banca</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                        <picture>
                             <source srcset="./assets/images/gallery/dumbbell-rack.avif" type="image/avif">
                             <source srcset="./assets/images/gallery/dumbbell-rack.webp" type="image/webp">
-                            <img src="./assets/images/gallery/dumbbell-rack.jpg" alt="Mancuernero" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/gallery/dumbbell-rack.jpg" alt="Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Racks de Sentadilla</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <picture>
                             <source srcset="./assets/images/gallery/lateral-raises-dumbbells.avif" type="image/avif">
                             <source srcset="./assets/images/gallery/lateral-raises-dumbbells.webp" type="image/webp">
-                            <img src="./assets/images/gallery/lateral-raises-dumbbells.jpg" alt="Equipamiento de alta calidad" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/gallery/lateral-raises-dumbbells.jpg" alt="Equipamiento elite Eleiko para competición de powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture>
                     </div>
                     <div class="gallery-description">
                         <p>Equipamiento Elite</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gym">
                     <div class="gallery-placeholder">
                         <picture>
                             <source srcset="./assets/images/gallery/trust-the-process.avif" type="image/avif">
                             <source srcset="./assets/images/gallery/trust-the-process.webp" type="image/webp">
-                            <img src="./assets/images/gallery/trust-the-process.jpg" alt="Ambiente familiar" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/gallery/trust-the-process.jpg" alt="Comunidad de powerlifters entrenando juntos en RZ Power House Sabadell" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture>
                     </div>
                     <div class="gallery-description">
@@ -252,19 +349,19 @@
         <div class="container-fluid">
             <h2 class="section-title reveal-text center">PRODUCTOS</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="gymTrainingZone">
                     <div class="gallery-placeholder">
                         <picture>
                             <source srcset="./assets/images/products/hoodie1.avif" type="image/avif">
                             <source srcset="./assets/images/products/hoodie1.webp" type="image/webp">
-                            <img src="./assets/images/products/hoodie1.jpg" alt="Zona de Entrenamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/products/hoodie1.jpg" alt="Muñequeras profesionales para press de banca y levantamiento" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture> 
                     </div>
                     <div class="gallery-description">
                         <p>Cinturones de Levantamiento</p>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-gallery="productsTshirts">
                     <div class="gallery-placeholder">
                         <picture>
                             <source srcset="./assets/images/products/sleeveless-t-shirt.avif" type="image/avif">
@@ -281,7 +378,7 @@
                         <picture>
                             <source srcset="./assets/images/products/sweat-suit.avif" type="image/avif">
                             <source srcset="./assets/images/products/sweat-suit.webp" type="image/webp">
-                            <img src="./assets/images/products/sweat-suit.jpg" alt="Zona de Entrenamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/products/sweat-suit.jpg" alt="Rodilleras de competición para sentadilla powerlifting" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture> 
                     </div>
                     <div class="gallery-description">
@@ -293,7 +390,7 @@
                         <picture>
                             <source srcset="./assets/images/products/t-shirt.avif" type="image/avif">
                             <source srcset="./assets/images/products/t-shirt.webp" type="image/webp">
-                            <img src="./assets/images/products/t-shirt.jpg" alt="Zona de Entrenamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/products/t-shirt.jpg" alt="Tiza líquida y accesorios para entrenamiento de fuerza" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture> 
                     </div>
                     <div class="gallery-description">
@@ -305,7 +402,7 @@
                         <picture>
                             <source srcset="./assets/images/products/t-shirt.avif" type="image/avif">
                             <source srcset="./assets/images/products/t-shirt.webp" type="image/webp">
-                            <img src="./assets/images/products/t-shirt.jpg" alt="Zona de Entrenamiento" class="gallery-img" loading="lazy" width="400" height="400">
+                            <img src="./assets/images/products/t-shirt.jpg" alt="Merchandising oficial RZ Power House camisetas y sudaderas" class="gallery-img" loading="lazy" width="400" height="400">
                         </picture> 
                     </div>
                     <div class="gallery-description">
@@ -470,10 +567,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img class="footer-logo-image" src="./assets/images/rz-powerhouse-logo-negative.png" alt="RZ POWER HOUSE">
+                    <img class="footer-logo-image" src="./assets/images/rz-powerhouse-logo-negative.png" alt="RZ Power House - Gimnasio Powerlifting Sabadell">
                 </div>
 
-                <p>&copy; 2025 RZ Power House Powerlifting Gym. Todos los derechos reservados.</p>
+                <p>&copy; 2025 RZ Power House Powerlifting Gym Sabadell. Todos los derechos reservados.</p>
                 <a href="https://github.com/xaviibaez" target="_blank" rel="noopener noreferrer" class="github-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="currentColor">
