@@ -33,7 +33,7 @@ document.addEventListener('mousemove', (e) => {
 });
 
 // Efecto hover en enlaces y botones
-const interactiveElements = document.querySelectorAll('a, button, .service-card, .stat-card, .gallery-item');
+const interactiveElements = document.querySelectorAll('a, button, .service-card, .gallery-item');
 interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
         cursor.style.transform = 'scale(2)';
@@ -91,31 +91,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Animación de números (contador)
-const statNumbers = document.querySelectorAll('.stat-number');
-let hasAnimated = false;
-
-const animateNumbers = () => {
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
-        
-        const updateNumber = () => {
-            current += increment;
-            if (current < target) {
-                stat.textContent = Math.floor(current);
-                requestAnimationFrame(updateNumber);
-            } else {
-                stat.textContent = target + (target === 1000 ? '+' : '');
-            }
-        };
-        
-        updateNumber();
-    });
-};
-
 // Intersection Observer para animaciones
 const observerOptions = {
     threshold: 0.2,
@@ -126,18 +101,12 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            
-            // Animar números solo una vez
-            if (entry.target.classList.contains('stats') && !hasAnimated) {
-                animateNumbers();
-                hasAnimated = true;
-            }
         }
     });
 }, observerOptions);
 
 // Observar elementos para animaciones
-document.querySelectorAll('.reveal-text, .fade-in-up, .feature-item, .stats').forEach(el => {
+document.querySelectorAll('.reveal-text, .fade-in-up, .feature-item').forEach(el => {
     observer.observe(el);
 });
 
@@ -265,18 +234,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 block: 'start'
             });
         }
-    });
-});
-
-// Animación de las estadísticas al hacer hover
-statNumbers.forEach(stat => {
-    stat.addEventListener('mouseenter', () => {
-        stat.style.transform = 'scale(1.1)';
-        stat.style.transition = 'transform 0.3s ease';
-    });
-    
-    stat.addEventListener('mouseleave', () => {
-        stat.style.transform = 'scale(1)';
     });
 });
 
