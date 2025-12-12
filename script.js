@@ -217,18 +217,22 @@ let currentCarouselImages = [];
 // Datos de las imágenes por galería
 const galleryImages = {
     gymTrainingZone: [
-        { src: './assets/images/1.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
-        { src: './assets/images/2.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
-        { src: './assets/images/2.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
+        { src: './assets/images/gallery/training-zone.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
+        { src: './assets/images/gallery/bench-press.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
+        { src: './assets/images/gallery/dumbbell-rack.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
     ],
     gym: [
-        { src: './assets/images/1.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
-        { src: './assets/images/2.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
-        { src: './assets/images/3.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' }
+        { src: './assets/images/gallery/training-zone.jpg', alt: 'Zona de entrenamiento powerlifting RZ Power House con plataformas profesionales y barras Eleiko' },
+        { src: './assets/images/gallery/bench-press.jpg', alt: 'Estación de press de banca con equipamiento profesional para powerlifting' },
+        { src: './assets/images/gallery/dumbbell-rack.jpg', alt: 'Racks de sentadilla profesionales con sistema de seguridad para entrenamiento de powerlifting' },
+        { src: './assets/images/gallery/lateral-raises-dumbbells.jpg', alt: 'Equipamiento elite Eleiko para competición de powerlifting' },
+        { src: './assets/images/gallery/trust-the-process.jpg', alt: 'Comunidad de powerlifters entrenando juntos en RZ Power House Sabadell' }
     ],
     productsTshirts: [
-        { src: './assets/images/products/1.jpg', alt: 'Cinturones de levantamiento profesionales para powerlifting' },
-        { src: './assets/images/products/2.jpg', alt: 'Muñequeras profesionales para press de banca y levantamiento' }
+        { src: './assets/images/products/sleeveless-t-shirt.jpg', alt: 'Camiseta sin mangas RZ Power House' },
+        { src: './assets/images/products/hoodie1.jpg', alt: 'Sudadera con capucha RZ Power House' },
+        { src: './assets/images/products/t-shirt.jpg', alt: 'Camiseta RZ Power House' },
+        { src: './assets/images/products/sweat-suit.jpg', alt: 'Conjunto deportivo RZ Power House' }
     ]
 };
 
