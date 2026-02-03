@@ -500,3 +500,53 @@ if (typeof gtag !== 'undefined') {
         });
     }
 }
+
+// Funcion video productos
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('videoModal');
+    const videoContainer = document.getElementById('videoContainer');
+    const instagramLink = document.getElementById('instagramLink');
+    const closeBtn = document.querySelector('.close');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const videoSrc = this.getAttribute('data-video-src');
+            const instagramUrl = this.getAttribute('data-instagram-url');
+            
+            if (videoSrc) {
+                videoContainer.innerHTML = '';
+                
+                const video = document.createElement('video');
+                video.src = videoSrc;
+                video.autoplay = true;
+                video.muted = true;
+                video.loop = true;
+                video.controls = false;
+                video.playsInline = true;
+                
+                videoContainer.appendChild(video);
+                
+                instagramLink.href = instagramUrl;
+                instagramLink.style.display = 'inline-block';
+                
+                modal.style.display = 'flex';
+            }
+        });
+    });
+
+    // Cerrar el modal
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        videoContainer.innerHTML = '';
+        instagramLink.style.display = 'none';
+    });
+
+    // Cerrar el modal al hacer clic fuera
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            videoContainer.innerHTML = '';
+            instagramLink.style.display = 'none';
+        }
+    });
+});
