@@ -570,17 +570,16 @@ html {
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    gap: 2rem;
     align-items: center;
 }
 
 .about-image {
     position: relative;
-    padding-bottom: 2rem;
+    height: 100%;
 }
 
 .image-placeholder {
-    width: 100%;
     aspect-ratio: 4/5;
     background: linear-gradient(135deg, var(--gray-dark) 0%, var(--gray-light) 100%);
     display: flex;
@@ -670,9 +669,10 @@ html {
 
 .about-content p {
     font-size: 1.1rem;
-    line-height: 1.8;
+    line-height: 1.5;
     margin-bottom: 1.5rem;
     opacity: 0.9;
+    text-align: justify;
 }
 
 .about-features {
