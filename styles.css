@@ -1069,6 +1069,11 @@ html {
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 2px solid var(--gray-light);
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 .colaborators h4 {
