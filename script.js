@@ -501,6 +501,40 @@ if (typeof gtag !== 'undefined') {
     }
 }
 
+// Datos de los vídeos de la galería
+const productVideos = [
+    {
+        id: 'sweatshirt',
+        videoSrc: './assets/videos/products/sweatshirt.mp4',
+        instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    },
+    {
+        id: 'tank-top',
+        videoSrc: './assets/videos/products/tank-top.mp4',
+        instagramUrl: 'https://www.instagram.com/reel/DKIOFzZCXl4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    },
+    {
+        id: 'tracksuit',
+        videoSrc: './assets/videos/products/tracksuit.mp4',
+        instagramUrl: 'https://www.instagram.com/reel/DJHv-4aiI7L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    },
+    {
+        id: 't-shirt',
+        videoSrc: './assets/videos/products/t-shirt.mp4',
+        instagramUrl: 'https://www.instagram.com/reel/DA6dryjIWD8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    },
+    {
+        id: 'straps',
+        videoSrc: './assets/videos/products/straps.mp4',
+        instagramUrl: 'https://www.instagram.com/reel/CrMDmKgoFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    },
+    {
+        id: 'belt-wristbands',
+        videoSrc: './assets/videos/products/belt-and-wristbands.mp4',
+        instagramUrl: 'https://www.instagram.com/reel/CyO0mjYI18q/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    }
+];
+
 // Funcion video productos
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('videoModal');
@@ -508,16 +542,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const instagramLink = document.getElementById('instagramLink');
     const closeBtn = document.querySelector('.close');
 
-    document.querySelectorAll('.gallery-item').forEach(item => {
+    document.querySelectorAll('#products .gallery-item').forEach(item => {
         item.addEventListener('click', function() {
-            const videoSrc = this.getAttribute('data-video-src');
-            const instagramUrl = this.getAttribute('data-instagram-url');
+            const productId = this.getAttribute('product-id');
+            const product = productVideos.find(p => p.id === productId);
             
-            if (videoSrc) {
+            if (product) {
                 videoContainer.innerHTML = '';
                 
                 const video = document.createElement('video');
-                video.src = videoSrc;
+                video.src = product.videoSrc;
                 video.autoplay = true;
                 video.muted = true;
                 video.loop = true;
@@ -526,7 +560,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 videoContainer.appendChild(video);
                 
-                instagramLink.href = instagramUrl;
+                instagramLink.href = product.instagramUrl;
                 instagramLink.style.display = 'inline-block';
                 
                 modal.style.display = 'flex';
