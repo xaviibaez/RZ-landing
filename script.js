@@ -203,16 +203,18 @@ inputs.forEach(input => {
     });
 });
 
-// Carrusel de imágenes en modal
 const carouselModal = document.getElementById('carousel-modal');
+const carouselImageContainer = document.querySelector('.carousel-image-container');
 const carouselImage = document.querySelector('.carousel-image');
 const carouselCounter = document.querySelector('.carousel-counter');
 const carouselClose = document.querySelector('.carousel-close');
 const carouselPrev = document.querySelector('.carousel-prev');
 const carouselNext = document.querySelector('.carousel-next');
+const instagramLink = document.getElementById('instagramLink');
 
 let currentCarouselIndex = 0;
-let currentCarouselImages = [];
+let currentCarouselItems = [];
+let carouselVideo = null;
 
 // Datos de las imágenes por galería
 const galleryImages = {
@@ -236,9 +238,9 @@ const galleryImages = {
     ]
 };
 
-// Función para abrir el carrusel
+// Función para abrir el carrusel de imágenes
 function openCarousel(galleryType, startIndex) {
-    currentCarouselImages = galleryImages[galleryType];
+    currentCarouselItems = galleryImages[galleryType] || [];
     currentCarouselIndex = startIndex;
     updateCarouselImage();
     carouselModal.classList.add('show');
@@ -249,31 +251,85 @@ function openCarousel(galleryType, startIndex) {
 function closeCarousel() {
     carouselModal.classList.remove('show');
     document.body.style.overflow = '';
+    
+    // Limpiar estado específico de vídeos
+    if (carouselVideo) {
+        carouselVideo.pause();
+    }
+    if (instagramLink) {
+        instagramLink.style.display = 'none';
+        instagramLink.removeAttribute('href');
+    }
 }
 
-// Función para actualizar la imagen del carrusel
 function updateCarouselImage() {
-    const currentImage = currentCarouselImages[currentCarouselIndex];
+    const currentItem = currentCarouselItems[currentCarouselIndex];
+    if (!currentItem) return;
+    
+    const isVideo = currentItem.type === 'video';
     
     // Animación de salida
     carouselImage.style.opacity = '0';
     carouselImage.style.transform = 'scale(0.95)';
+    if (carouselVideo) {
+        carouselVideo.style.opacity = '0';
+        carouselVideo.style.transform = 'scale(0.95)';
+    }
     
     setTimeout(() => {
-        carouselImage.src = currentImage.src;
-        carouselImage.alt = currentImage.alt;
-        carouselCounter.textContent = `${currentCarouselIndex + 1} / ${currentCarouselImages.length}`;
+        if (isVideo) {
+            if (!carouselVideo) {
+                carouselVideo = document.createElement('video');
+                carouselVideo.classList.add('carousel-video');
+                carouselVideo.autoplay = true;
+                carouselVideo.muted = true;
+                carouselVideo.loop = true;
+                carouselVideo.controls = false;
+                carouselVideo.playsInline = true;
+                carouselImageContainer.insertBefore(carouselVideo, carouselCounter);
+            }
+            
+            carouselVideo.src = currentItem.src;
+            carouselVideo.style.display = 'block';
+            carouselImage.style.display = 'none';
+            
+            if (instagramLink && currentItem.instagramUrl) {
+                instagramLink.href = currentItem.instagramUrl;
+                instagramLink.style.display = 'inline-block';
+            }
+        } else {
+            if (carouselVideo) {
+                carouselVideo.pause();
+                carouselVideo.style.display = 'none';
+            }
+            
+            carouselImage.src = currentItem.src;
+            carouselImage.alt = currentItem.alt || '';
+            carouselImage.style.display = 'block';
+            
+            if (instagramLink) {
+                instagramLink.style.display = 'none';
+                instagramLink.removeAttribute('href');
+            }
+        }
+        
+        carouselCounter.textContent = `${currentCarouselIndex + 1} / ${currentCarouselItems.length}`;
         
         // Animación de entrada
         setTimeout(() => {
-            carouselImage.style.opacity = '1';
-            carouselImage.style.transform = 'scale(1)';
+            if (isVideo && carouselVideo) {
+                carouselVideo.style.opacity = '1';
+                carouselVideo.style.transform = 'scale(1)';
+            } else {
+                carouselImage.style.opacity = '1';
+                carouselImage.style.transform = 'scale(1)';
+            }
         }, 50);
     }, 200);
     
     // Actualizar estado de los botones
     carouselPrev.disabled = currentCarouselIndex === 0;
-    carouselNext.disabled = currentCarouselIndex === currentCarouselImages.length - 1;
+    carouselNext.disabled = currentCarouselIndex === currentCarouselItems.length - 1;
 }
 
 // Event listeners del carrusel
@@ -292,14 +348,13 @@ carouselPrev.addEventListener('click', () => {
 });
 
 carouselNext.addEventListener('click', () => {
-    if (currentCarouselIndex < currentCarouselImages.length - 1) {
+    if (currentCarouselIndex < currentCarouselItems.length - 1) {
         currentCarouselIndex++;
         updateCarouselImage();
     }
 });
 
-// Agregar eventos de clic a los items de la galería
-document.querySelectorAll('.gallery-item').forEach((item) => {
+document.querySelectorAll('#gallery .gallery-item').forEach((item) => {
     item.addEventListener('click', () => {
         const galleryType = item.getAttribute('data-gallery');
         const parentSection = item.closest('section');
@@ -329,7 +384,7 @@ function handleSwipe() {
     if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
             // Swipe izquierda - siguiente imagen
-            if (currentCarouselIndex < currentCarouselImages.length - 1) {
+            if (currentCarouselIndex < currentCarouselItems.length - 1) {
                 carouselNext.click();
             }
         } else {
@@ -501,86 +556,62 @@ if (typeof gtag !== 'undefined') {
     }
 }
 
-// Datos de los vídeos de la galería
+// Datos de los vídeos de la galería de productos
 const productVideos = [
     {
         id: 'sweatshirt',
-        videoSrc: './assets/videos/products/sweatshirt.mp4',
+        type: 'video',
+        src: './assets/videos/products/sweatshirt.mp4',
         instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     },
     {
         id: 'tank-top',
-        videoSrc: './assets/videos/products/tank-top.mp4',
+        type: 'video',
+        src: './assets/videos/products/tank-top.mp4',
         instagramUrl: 'https://www.instagram.com/reel/DKIOFzZCXl4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     },
     {
         id: 'tracksuit',
-        videoSrc: './assets/videos/products/tracksuit.mp4',
+        type: 'video',
+        src: './assets/videos/products/tracksuit.mp4',
         instagramUrl: 'https://www.instagram.com/reel/DJHv-4aiI7L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     },
     {
         id: 't-shirt',
-        videoSrc: './assets/videos/products/t-shirt.mp4',
+        type: 'video',
+        src: './assets/videos/products/t-shirt.mp4',
         instagramUrl: 'https://www.instagram.com/reel/DA6dryjIWD8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     },
     {
         id: 'straps',
-        videoSrc: './assets/videos/products/straps.mp4',
+        type: 'video',
+        src: './assets/videos/products/straps.mp4',
         instagramUrl: 'https://www.instagram.com/reel/CrMDmKgoFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     },
     {
         id: 'belt-wristbands',
-        videoSrc: './assets/videos/products/belt-and-wristbands.mp4',
+        type: 'video',
+        src: './assets/videos/products/belt-and-wristbands.mp4',
         instagramUrl: 'https://www.instagram.com/reel/CyO0mjYI18q/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     }
 ];
 
-// Funcion video productos
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('videoModal');
-    const videoContainer = document.getElementById('videoContainer');
-    const instagramLink = document.getElementById('instagramLink');
-    const closeBtn = document.querySelector('.close');
+// Función para abrir el carrusel con vídeos de productos
+function openProductCarousel(startIndex) {
+    currentCarouselItems = productVideos;
+    currentCarouselIndex = startIndex;
+    updateCarouselImage();
+    carouselModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
 
-    document.querySelectorAll('#products .gallery-item').forEach(item => {
-        item.addEventListener('click', function() {
-            const productId = this.getAttribute('product-id');
-            const product = productVideos.find(p => p.id === productId);
-            
-            if (product) {
-                videoContainer.innerHTML = '';
-                
-                const video = document.createElement('video');
-                video.src = product.videoSrc;
-                video.autoplay = true;
-                video.muted = true;
-                video.loop = true;
-                video.controls = false;
-                video.playsInline = true;
-                
-                videoContainer.appendChild(video);
-                
-                instagramLink.href = product.instagramUrl;
-                instagramLink.style.display = 'inline-block';
-                
-                modal.style.display = 'flex';
-            }
-        });
-    });
-
-    // Cerrar el modal
-    closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-        videoContainer.innerHTML = '';
-        instagramLink.style.display = 'none';
-    });
-
-    // Cerrar el modal al hacer clic fuera
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            videoContainer.innerHTML = '';
-            instagramLink.style.display = 'none';
+// Eventos de clic para los productos (usan el mismo carrusel)
+document.querySelectorAll('#products .gallery-item').forEach((item) => {
+    item.addEventListener('click', () => {
+        const productId = item.getAttribute('product-id');
+        const productIndex = productVideos.findIndex((p) => p.id === productId);
+        if (productIndex !== -1) {
+            openProductCarousel(productIndex);
         }
     });
 });
