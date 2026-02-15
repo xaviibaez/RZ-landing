@@ -557,48 +557,34 @@ if (typeof gtag !== 'undefined') {
 }
 
 // Datos de los vídeos de la galería de productos
-const productVideos = [
-    {
-        id: 'sweatshirt',
-        type: 'video',
-        src: './assets/videos/products/sweatshirt.mp4',
-        instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-    },
-    {
-        id: 'tank-top',
-        type: 'video',
-        src: './assets/videos/products/tank-top.mp4',
-        instagramUrl: 'https://www.instagram.com/reel/DKIOFzZCXl4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-    },
-    {
-        id: 'tracksuit',
-        type: 'video',
-        src: './assets/videos/products/tracksuit.mp4',
-        instagramUrl: 'https://www.instagram.com/reel/DJHv-4aiI7L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-    },
-    {
-        id: 't-shirt',
-        type: 'video',
-        src: './assets/videos/products/t-shirt.mp4',
-        instagramUrl: 'https://www.instagram.com/reel/DA6dryjIWD8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-    },
-    {
-        id: 'straps',
-        type: 'video',
-        src: './assets/videos/products/straps.mp4',
-        instagramUrl: 'https://www.instagram.com/reel/CrMDmKgoFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-    },
-    {
-        id: 'belt-wristbands',
-        type: 'video',
-        src: './assets/videos/products/belt-and-wristbands.mp4',
-        instagramUrl: 'https://www.instagram.com/reel/CyO0mjYI18q/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-    }
-];
+const productVideos = {
+    sweatshirt: [
+        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
+        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
+        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
+        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
+        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
+    ],
+    tankTop: [ 
+        { type: 'video', src: './assets/videos/products/tank-top.mp4', instagramUrl: 'https://www.instagram.com/reel/DKIOFzZCXl4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
+    ],
+    tracksuit: [
+        { type: 'video', src: './assets/videos/products/tracksuit.mp4', instagramUrl: 'https://www.instagram.com/reel/DJHv-4aiI7L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
+    ],
+    tShirt: [
+        { type: 'video', src: './assets/videos/products/t-shirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DA6dryjIWD8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
+    ],
+    straps: [
+        { type: 'video', src: './assets/videos/products/straps.mp4', instagramUrl: 'https://www.instagram.com/reel/CrMDmKgoFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
+    ],
+    beltWristbands: [
+        { type: 'video', src: './assets/videos/products/belt-and-wristbands.mp4', instagramUrl: 'https://www.instagram.com/reel/CyO0mjYI18q/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
+    ]
+};
 
 // Función para abrir el carrusel con vídeos de productos
-function openProductCarousel(startIndex) {
-    currentCarouselItems = productVideos;
+function openProductCarousel(galleryType, startIndex) {
+    currentCarouselItems = productVideos[galleryType] || [];
     currentCarouselIndex = startIndex;
     updateCarouselImage();
     carouselModal.classList.add('show');
@@ -609,9 +595,9 @@ function openProductCarousel(startIndex) {
 document.querySelectorAll('#products .gallery-item').forEach((item) => {
     item.addEventListener('click', () => {
         const productId = item.getAttribute('product-id');
-        const productIndex = productVideos.findIndex((p) => p.id === productId);
-        if (productIndex !== -1) {
-            openProductCarousel(productIndex);
-        }
+        const parentSection = item.closest('section');
+        const sectionItems = Array.from(parentSection.querySelectorAll(`.gallery-item[product-id="${productId}"]`));
+        const itemIndex = sectionItems.indexOf(item);
+        openProductCarousel(productId, itemIndex)
     });
 });
