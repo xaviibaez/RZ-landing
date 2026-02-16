@@ -559,10 +559,6 @@ if (typeof gtag !== 'undefined') {
 // Datos de los vídeos de la galería de productos
 const productVideos = {
     sweatshirt: [
-        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
-        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
-        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
-        { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
         { type: 'video', src: './assets/videos/products/sweatshirt.mp4', instagramUrl: 'https://www.instagram.com/reel/DP1xbFLivBj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' }
     ],
     tankTop: [ 
