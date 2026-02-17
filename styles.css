@@ -1068,25 +1068,65 @@ html {
 .colaborators {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 2px solid var(--gray-light);
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+    border-top: 1px solid var(--gray-light);
+    text-align: center;
 }
 
-.colaborators h4 {
-    font-size: 1.2rem;
-    letter-spacing: 3px;
+.colaborators-label {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
     margin-bottom: 1rem;
-    color: var(--accent-gold);
+    color: var(--white);
+    opacity: 0.6;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
-.colaborators p {
-    font-size: 1rem;
-    opacity: 0.7;
+.colaborators-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    font-size: 0.95rem;
     letter-spacing: 1px;
+}
+
+.colaborator-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 400;
+    opacity: 0.7;
+    position: relative;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+.colaborator-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-gold);
+    transition: width 0.3s ease;
+}
+
+.colaborator-link:hover {
+    opacity: 1;
+    color: var(--white);
+}
+
+.colaborator-link:hover::after {
+    width: 100%;
+}
+
+.colaborators-sep {
+    color: var(--gray-light);
+    opacity: 0.4;
+    font-size: 0.7rem;
+    user-select: none;
 }
 
 .contact-form {
@@ -1335,6 +1375,27 @@ html {
     .social-link {
         width: 100%;
         justify-content: center;
+    }
+
+    .colaborators {
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .colaborators-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .colaborators-sep {
+        display: none;
+    }
+
+    .colaborator-link {
+        white-space: normal;
+        text-align: center;
     }
 
     .footer-logo-image {
