@@ -1039,11 +1039,11 @@ html {
     gap: 2rem;
     height: 100%;
     justify-content: space-between;
+}
 
-    a {
+.info-items a {
     text-decoration: none;
     color: inherit;
-}
 }
 
 .info-item h4 {
