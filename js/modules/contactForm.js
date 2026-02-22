@@ -1,17 +1,12 @@
+/**
+ * Módulo del formulario de contacto con FormSubmit
+ */
+
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('enviado') === '1') {
-        showNotification('¡Mensaje enviado con éxito! Te contactaremos pronto.', 'success');
-        if (window.history.replaceState) {
-            const cleanUrl = window.location.pathname + (window.location.hash || '');
-            window.history.replaceState({}, document.title, cleanUrl);
-        }
-    }
-
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const telefonoInput = document.getElementById('telefono');
@@ -22,18 +17,45 @@ function initContactForm() {
             return;
         }
 
-        const correoInput = form.querySelector('input[name="correo"]');
-        const replyToEl = document.getElementById('form-replyto');
-        if (replyToEl && correoInput?.value) {
-            replyToEl.value = correoInput.value.trim();
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn?.textContent || 'ENVIAR';
+
+        if (submitBtn) {
+            submitBtn.textContent = 'ENVIANDO...';
+            submitBtn.disabled = true;
         }
 
-        const nextEl = document.getElementById('form-next');
-        if (nextEl) {
-            const returnUrl = window.location.origin + window.location.pathname + '?enviado=1' + (window.location.hash || '');
-            nextEl.value = returnUrl;
-        }
+        const formData = new FormData(form);
 
-        form.submit();
+        try {
+            const response = await fetch('https://formsubmit.co/241xavi@gmail.com', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok || response.type === 'opaque') {
+                showNotification('¡Mensaje enviado con éxito! Te contactaremos pronto.', 'success');
+                form.reset();
+                if (submitBtn) {
+                    submitBtn.textContent = '✓ ENVIADO';
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }
+            } else {
+                throw new Error('Error en el envío');
+            }
+        } catch (error) {
+            console.error('Exception on form submit:', error);
+            showNotification('Error al enviar el mensaje. Por favor, inténtalo de nuevo o contáctanos directamente.', 'error');
+            if (submitBtn) {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
     });
 }
