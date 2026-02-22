@@ -1090,6 +1090,54 @@ html {
     transform: scale(1.2);
 }
 
+.social-link-whatsapp:hover {
+    border-color: #25D366;
+    color: #25D366;
+}
+
+.social-link-instagram:hover {
+    border-color: #E4405F;
+    color: #E4405F;
+}
+
+.social-link-tiktok:hover {
+    border-color: #00F2EA;
+    color: #00F2EA;
+}
+
+.social-link-youtube:hover {
+    border-color: #FF0000;
+    color: #FF0000;
+}
+
+/* Botón flotante WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    background-color: #25D366;
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    color: var(--white);
+}
+
+.whatsapp-float:active {
+    transform: scale(0.98);
+}
+
 .colaborators {
     margin-top: 3rem;
     padding-top: 2rem;
