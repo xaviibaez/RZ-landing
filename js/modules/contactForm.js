@@ -28,7 +28,7 @@ function initContactForm() {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch('https://formsubmit.co/antoni-10-23@hotmail.com', {
+            const response = await fetch('https://formsubmit.co/241xavi@gmail.com', {
                 method: 'POST',
                 body: formData,
                 headers: {
