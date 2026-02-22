@@ -1,12 +1,14 @@
 /**
- * Módulo del formulario de contacto con FormSubmit
+ * Módulo del formulario de contacto: abre WhatsApp con los datos rellenados
  */
+
+const WHATSAPP_NUMBER = '34677624775';
 
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const telefonoInput = document.getElementById('telefono');
@@ -17,45 +19,31 @@ function initContactForm() {
             return;
         }
 
-        const submitBtn = form.querySelector('.submit-btn');
-        const originalText = submitBtn?.textContent || 'ENVIAR';
+        const nombre = (form.querySelector('[name="nombre"]')?.value ?? '').trim();
+        const correo = (form.querySelector('[name="correo"]')?.value ?? '').trim();
+        const interesSelect = form.querySelector('[name="interes"]');
+        const interesTexto = interesSelect?.selectedOptions?.[0]?.textContent?.trim() || interesSelect?.value || '';
+        const mensaje = (form.querySelector('[name="mensaje"]')?.value ?? '').trim();
 
-        if (submitBtn) {
-            submitBtn.textContent = 'ENVIANDO...';
-            submitBtn.disabled = true;
+        const lineas = [
+            'Hola, me gustaría recibir información desde la web de RZ Power House.',
+            '',
+            '*Nombre:* ' + nombre,
+            '*Email:* ' + correo,
+            '*Teléfono:* ' + telefono,
+            '*Interesado en:* ' + interesTexto,
+        ];
+        if (mensaje) {
+            lineas.push('');
+            lineas.push('*Mensaje:*');
+            lineas.push(mensaje);
         }
 
-        const formData = new FormData(form);
+        const texto = lineas.join('\n');
+        const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(texto);
 
-        try {
-            const response = await fetch('https://formsubmit.co/antoni-10-23@hotmail.com', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok || response.type === 'opaque') {
-                showNotification('¡Mensaje enviado con éxito! Te contactaremos pronto.', 'success');
-                form.reset();
-                if (submitBtn) {
-                    submitBtn.textContent = '✓ ENVIADO';
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    }, 3000);
-                }
-            } else {
-                throw new Error('Error en el envío');
-            }
-        } catch (error) {
-            console.error('Exception on form submit:', error);
-            showNotification('Error al enviar el mensaje. Por favor, inténtalo de nuevo o contáctanos directamente.', 'error');
-            if (submitBtn) {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        }
+        showNotification('Se abrirá WhatsApp con tu mensaje. Completa el envío allí.', 'success');
+        form.reset();
+        window.open(url, '_blank', 'noopener,noreferrer');
     });
 }
