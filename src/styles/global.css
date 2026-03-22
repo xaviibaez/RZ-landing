@@ -342,7 +342,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: filter 0.4s ease;
   }
 
   .gallery-overlay {
@@ -364,14 +364,19 @@
   }
 
   @media (hover: hover) {
-    .gallery-item:hover .gallery-img { transform: scale(1.06); }
-    .gallery-item:hover .gallery-overlay { background: rgba(196, 30, 58, 0.4); }
+    .gallery-item:hover .gallery-img { filter: blur(2px) brightness(0.7); }
     .gallery-item:hover .gallery-icon { opacity: 1; transform: scale(1); }
   }
 
   .gallery-label {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 0.6rem 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0.5rem 0.75rem;
     text-align: center;
   }
 
@@ -383,31 +388,10 @@
     color: rgba(255, 255, 255, 0.85);
   }
 
-  /* Service card bottom bar */
+  /* Service card */
   .service-card {
     position: relative;
     overflow: hidden;
-    transition: border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
-  }
-
-  .service-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-red);
-    transition: width 0.4s ease;
-  }
-
-  @media (hover: hover) {
-    .service-card:hover {
-      border-color: var(--accent-red);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 40px rgba(196, 30, 58, 0.15);
-    }
-    .service-card:hover::before { width: 100%; }
   }
 
   /* Testimonial card */
@@ -496,8 +480,8 @@
 
   @media (hover: hover) {
     .carousel-nav-btn:hover:not(:disabled) {
-      background: var(--accent-red);
-      border-color: var(--accent-red);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.35);
     }
   }
 
