@@ -41,13 +41,15 @@ export default (Alpine: typeof Alpine) => {
     next() { this.goTo((this.current + 1) % this.total); },
   }));
 
-  // ── Gallery: image carousel with touch + keyboard ─────────────────────────
+  // ── Gallery: image carousel with touch drag + slide animation ─────────────
   Alpine.data('gallery', () => ({
     isOpen: false as boolean,
     allImages: {} as Record<string, Array<{ src: string; alt: string }>>,
     images: [] as Array<{ src: string; alt: string }>,
     currentIndex: 0 as number,
     touchStartX: 0 as number,
+    dragOffset: 0 as number,
+    isDragging: false as boolean,
 
     init() {
       const raw = (this.$el as HTMLElement).dataset.images || '{}';
@@ -64,18 +66,47 @@ export default (Alpine: typeof Alpine) => {
     close() {
       this.isOpen = false;
       document.body.style.overflow = '';
+      this.dragOffset = 0;
+      this.isDragging = false;
+    },
+
+    _animateSlide(dir: number) {
+      this.$nextTick(() => {
+        const img = (this.$refs as Record<string, HTMLElement>).carouselImg;
+        if (!img) return;
+        img.classList.remove('slide-from-right', 'slide-from-left');
+        void img.offsetWidth; // force reflow to restart animation
+        img.classList.add(dir > 0 ? 'slide-from-right' : 'slide-from-left');
+      });
     },
 
     prev() {
+      if (this.images.length <= 1) return;
       this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+      this._animateSlide(-1);
     },
 
     next() {
+      if (this.images.length <= 1) return;
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
+      this._animateSlide(1);
+    },
+
+    onTouchStart(e: TouchEvent) {
+      this.touchStartX = e.touches[0].clientX;
+      this.isDragging = true;
+      this.dragOffset = 0;
+    },
+
+    onTouchMove(e: TouchEvent) {
+      if (!this.isDragging) return;
+      this.dragOffset = e.touches[0].clientX - this.touchStartX;
     },
 
     onTouchEnd(e: TouchEvent) {
       const diff = this.touchStartX - e.changedTouches[0].clientX;
+      this.isDragging = false;
+      this.dragOffset = 0;
       if (Math.abs(diff) > 50) diff > 0 ? this.next() : this.prev();
     },
   }));

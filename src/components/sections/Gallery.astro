@@ -68,36 +68,44 @@ const imagesJson = JSON.stringify(galleryImages);
         >×</button>
 
         <div
-          class="flex items-center gap-4 w-full max-w-[90vw] px-2 lg:gap-8"
-          @touchstart.passive="touchStartX = $event.touches[0].clientX"
+          class="flex flex-col items-center gap-5 w-full max-w-[95vw] lg:max-w-[min(90vw,900px)] px-2"
+          @touchstart.passive="onTouchStart($event)"
+          @touchmove.passive="onTouchMove($event)"
           @touchend.passive="onTouchEnd($event)"
         >
-          <button
-            class="carousel-nav-btn"
-            @click="prev()"
-            :disabled="images.length <= 1"
-            aria-label="Imagen anterior"
-          >&#10094;</button>
+          <!-- Image row: side buttons only on desktop -->
+          <div class="flex items-center gap-4 w-full lg:gap-8">
+            <button
+              class="hidden lg:flex carousel-nav-btn shrink-0"
+              @click="prev()"
+              :disabled="images.length <= 1"
+              aria-label="Imagen anterior"
+            >&#10094;</button>
 
-          <div class="flex-1 relative flex items-center justify-center">
-            <img
-              :src="images[currentIndex]?.src"
-              :alt="images[currentIndex]?.alt"
-              class="max-h-[80vh] max-w-full object-contain border border-[var(--gray-light)]"
-              loading="lazy"
-            />
-            <div
-              class="absolute bottom-[-2rem] left-1/2 -translate-x-1/2 text-xs text-white/50 tracking-[0.1em]"
-              x-text="`${currentIndex + 1} / ${images.length}`"
-            ></div>
+            <div class="flex-1 overflow-hidden">
+              <img
+                x-ref="carouselImg"
+                :src="images[currentIndex]?.src"
+                :alt="images[currentIndex]?.alt"
+                :style="isDragging ? `transform: translateX(${dragOffset}px); transition: none` : ''"
+                class="max-h-[82vh] w-full object-contain border border-[var(--gray-light)]"
+                loading="lazy"
+              />
+            </div>
+
+            <button
+              class="hidden lg:flex carousel-nav-btn shrink-0"
+              @click="next()"
+              :disabled="images.length <= 1"
+              aria-label="Imagen siguiente"
+            >&#10095;</button>
           </div>
 
-          <button
-            class="carousel-nav-btn"
-            @click="next()"
-            :disabled="images.length <= 1"
-            aria-label="Imagen siguiente"
-          >&#10095;</button>
+          <!-- Counter -->
+          <span
+            class="text-xs text-white/50 tracking-[0.1em]"
+            x-text="`${currentIndex + 1} / ${images.length}`"
+          ></span>
         </div>
       </div>
     </div>
