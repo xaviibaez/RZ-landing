@@ -1,132 +1,58 @@
 ---
 ---
 
-<section id="about" class="about">
+<section id="about" class="bg-[var(--gray-dark)]">
   <div class="container">
-    <h2 class="section-title reveal-text center">SOBRE NOSOTROS</h2>
-    <div class="about-grid">
-      <div class="about-content">
-        <p class="fade-in-up">
+    <h2 class="section-title reveal-text center mb-10">SOBRE NOSOTROS</h2>
+    <div class="grid grid-cols-1 gap-10 items-center lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+
+      <div class="flex flex-col gap-5">
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
           Bienvenido a RZ Power House, un espacio dedicado al powerlifting y al entrenamiento de hipertrofia,
           diseñado para todos los niveles. Ya seas principiante, quieras perfeccionar tu técnica o seas un
           competidor experimentado, aquí encontrarás el entorno ideal para alcanzar tus metas y superarte
           día tras día.
         </p>
-        <p class="fade-in-up">
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
           Contamos con equipamiento homologado de powerlifting, que incluye racks de competición, discos
           calibrados, barras de competición, plataformas de peso muerto y barras especiales, pensado para
           que entrenes con seguridad y profesionalismo. Además, nuestra amplia gama de maquinaria de
           hipertrofia cuenta con equipos de una de las marcas más reconocidas del mercado americano:
           HAMMER STRENGTH, asegurando calidad, durabilidad y resultados óptimos.
         </p>
-        <p class="fade-in-up">
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
           Nuestro equipo está formado por entrenadores titulados y apasionados, que te guiarán en cada
           entrenamiento, adaptando los programas a tus necesidades y objetivos. Desde correcciones técnicas
           y planificación de progresiones hasta consejos sobre recuperación y rendimiento, estamos aquí para
           ayudarte a sacar el máximo provecho de cada sesión.
         </p>
-        <p class="fade-in-up">
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
           En nuestro gimnasio, cada levantamiento cuenta. Creemos en la constancia, la disciplina y en
           superar los propios límites. Queremos que cada persona que cruce nuestras puertas se sienta
           acompañada, motivada y en su espacio.
         </p>
-        <p class="fade-in-up">
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
           Si buscas un lugar donde entrenar con equipamiento profesional, entrenadores expertos y un
           ambiente que te inspire, este es tu gimnasio. Aquí no solo levantas pesos, levantas tu potencial.
         </p>
       </div>
 
-      <div class="about-image">
-        <div class="image-wrapper">
-          <picture>
-            <source srcset="/assets/images/about/lifting-example.avif" type="image/avif" />
-            <source srcset="/assets/images/about/lifting-example.webp" type="image/webp" />
-            <img
-              src="/assets/images/about/lifting-example.jpg"
-              alt="Atleta haciendo peso muerto en competición"
-              class="about-img"
-              loading="lazy"
-              width="800"
-              height="1000"
-            />
-          </picture>
-          <div class="image-overlay"></div>
-        </div>
+      <div class="relative overflow-hidden border border-[var(--gray-light)] transition-[transform,box-shadow] duration-400 hover-safe:-translate-y-1.5 hover-safe:shadow-[0_20px_60px_rgba(196,30,58,0.2)]">
+        <picture>
+          <source srcset="/assets/images/about/lifting-example.avif" type="image/avif" />
+          <source srcset="/assets/images/about/lifting-example.webp" type="image/webp" />
+          <img
+            src="/assets/images/about/lifting-example.jpg"
+            alt="Atleta haciendo peso muerto en competición"
+            class="w-full h-auto block transition-transform duration-400 hover-safe:scale-[1.03]"
+            loading="lazy"
+            width="800"
+            height="1000"
+          />
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(196,30,58,0.1)] to-transparent pointer-events-none"></div>
       </div>
+
     </div>
   </div>
 </section>
-
-<style>
-  .about {
-    background: var(--gray-dark);
-  }
-
-  .about .section-title {
-    margin-bottom: 2.5rem;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-
-  .about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .about-content p {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.8;
-    font-size: 0.95rem;
-  }
-
-  .image-wrapper {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--gray-light);
-    transition:
-      transform 0.4s ease,
-      box-shadow 0.4s ease;
-  }
-
-  .about-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-
-  @media (hover: hover) {
-    .image-wrapper:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(196, 30, 58, 0.2);
-    }
-
-    .image-wrapper:hover .about-img {
-      transform: scale(1.03);
-    }
-  }
-
-  .image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), transparent);
-    pointer-events: none;
-  }
-
-  @media (min-width: 1024px) {
-    .about-grid {
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 4rem;
-    }
-
-    .about-content p {
-      font-size: 1.05rem;
-    }
-  }
-</style>

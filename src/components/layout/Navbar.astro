@@ -4,32 +4,35 @@
 <nav
   x-data="navbar()"
   @scroll.window="handleScroll()"
-  :class="{ 'scrolled': scrolled, 'nav-hidden': hidden }"
-  class="navbar"
+  :class="{ 'scrolled': scrolled, '-translate-y-full': hidden }"
+  class="navbar fixed top-0 left-0 right-0 z-[1000]"
 >
-  <div class="nav-container">
-    <a href="#hero" class="logo">
+  <div class="flex justify-between items-center max-w-[1400px] mx-auto px-5">
+    <a href="#hero">
       <img
         src="/assets/images/rz-powerhouse-logo-negative.png"
         alt="RZ Power House - Gimnasio Powerlifting Sabadell"
-        class="logo-img"
+        class="h-9 md:h-10 w-auto"
         width="200"
         height="50"
       />
     </a>
 
-    <ul class="nav-menu" :class="{ 'active': open }">
-      <li><a href="#hero" class="nav-link" @click="open = false">Inicio</a></li>
-      <li><a href="#about" class="nav-link" @click="open = false">Nosotros</a></li>
-      <li><a href="#services" class="nav-link" @click="open = false">Servicios</a></li>
-      <li><a href="#gallery" class="nav-link" @click="open = false">Galería</a></li>
-      <li><a href="#products" class="nav-link" @click="open = false">Productos</a></li>
-      <li><a href="#testimonials" class="nav-link" @click="open = false">Opiniones</a></li>
-      <li><a href="#contact" class="nav-link" @click="open = false">Contacto</a></li>
+    <ul
+      class="fixed top-0 right-0 translate-x-full w-3/4 max-w-[320px] h-dvh bg-black border-l border-[var(--gray-light)] flex flex-col justify-center items-center gap-8 z-[1001] p-8 overscroll-contain [transition:transform_350ms_cubic-bezier(0.4,0,0.2,1)] md:static md:w-auto md:max-w-none md:h-auto md:bg-transparent md:border-none md:flex-row md:gap-6 md:p-0 md:translate-x-0"
+      :class="{ 'translate-x-0': open }"
+    >
+      <li><a href="#hero"         @click="open = false" class="nav-link-item">Inicio</a></li>
+      <li><a href="#about"        @click="open = false" class="nav-link-item">Nosotros</a></li>
+      <li><a href="#services"     @click="open = false" class="nav-link-item">Servicios</a></li>
+      <li><a href="#gallery"      @click="open = false" class="nav-link-item">Galería</a></li>
+      <li><a href="#products"     @click="open = false" class="nav-link-item">Productos</a></li>
+      <li><a href="#testimonials" @click="open = false" class="nav-link-item">Opiniones</a></li>
+      <li><a href="#contact"      @click="open = false" class="nav-link-item">Contacto</a></li>
     </ul>
 
     <button
-      class="hamburger"
+      class="hamburger-btn md:hidden"
       :class="{ 'active': open }"
       @click="open = !open"
       :aria-expanded="open"
@@ -41,202 +44,3 @@
     </button>
   </div>
 </nav>
-
-<!-- Overlay for mobile menu -->
-<div
-  x-data
-  x-show="$store.nav?.open"
-  class="nav-overlay"
-  @click="$dispatch('close-nav')"
-  style="display: none;"
-></div>
-
-<style>
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    padding: 1.25rem 0;
-    transition:
-      background var(--t-base),
-      padding var(--t-base),
-      box-shadow var(--t-base),
-      transform var(--t-base);
-  }
-
-  .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 0.75rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-  }
-
-  .navbar.nav-hidden {
-    transform: translateY(-100%);
-  }
-
-  .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-
-  .logo-img {
-    height: 36px;
-    width: auto;
-  }
-
-  /* ── Mobile nav (default) ── */
-
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 320px;
-    height: 100dvh;
-    background: #000;
-    border-left: 1px solid var(--gray-light);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1001;
-    padding: 2rem;
-    overscroll-behavior: contain;
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .nav-link {
-    /* Touch target mínimo 44px */
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    padding-inline: 0.5rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #fff;
-    transition: color var(--t-base);
-    position: relative;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 0.5rem;
-    right: 0.5rem;
-    width: 0;
-    height: 2px;
-    background: var(--accent-gold);
-    transition: width var(--t-base);
-  }
-
-  @media (hover: hover) {
-    .nav-link:hover {
-      color: var(--accent-gold);
-    }
-
-    .nav-link:hover::after {
-      width: calc(100% - 1rem);
-    }
-  }
-
-  /* ── Hamburger (touch target 44×44px) ── */
-
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    padding: 0.75rem;
-    min-width: 44px;
-    min-height: 44px;
-    z-index: 1002;
-    touch-action: manipulation;
-  }
-
-  .hamburger span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: #fff;
-    transition:
-      transform var(--t-base),
-      opacity var(--t-base);
-    transform-origin: center;
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  /* ── Desktop (md+) ── */
-
-  @media (min-width: 768px) {
-    .navbar {
-      padding: 1rem 0;
-    }
-
-    .logo-img {
-      height: 40px;
-    }
-
-    .nav-menu {
-      position: static;
-      width: auto;
-      max-width: none;
-      height: auto;
-      background: transparent;
-      border: none;
-      flex-direction: row;
-      gap: 1.5rem;
-      padding: 0;
-      right: auto !important;
-    }
-
-    .nav-link {
-      font-size: 0.8rem;
-      min-height: unset;
-      padding-inline: 0;
-    }
-
-    .nav-link::after {
-      bottom: -2px;
-      left: 0;
-      right: 0;
-    }
-
-    @media (hover: hover) {
-      .nav-link:hover::after {
-        width: 100%;
-      }
-    }
-
-    .hamburger {
-      display: none;
-    }
-  }
-</style>

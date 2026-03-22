@@ -1,14 +1,20 @@
 ---
 import { gallerySections, galleryImages } from '../../data/gallery';
+
+const imagesJson = JSON.stringify(galleryImages);
 ---
 
-<section id="gallery" class="gallery" data-analytics="gallery">
+<section id="gallery" class="bg-[var(--gray-dark)]" data-analytics="gallery">
   <div class="container-fluid">
-    <h2 class="section-title reveal-text center">EL TEMPLO</h2>
+    <h2 class="section-title reveal-text center mb-10">EL TEMPLO</h2>
 
-    <div x-data="gallery()" @keydown.escape.window="close()">
+    <div
+      x-data="gallery()"
+      data-images={imagesJson}
+      @keydown.escape.window="close()"
+    >
       <!-- Thumbnails grid -->
-      <div class="gallery-grid">
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5 lg:gap-4">
         {gallerySections.map((section) => (
           <div
             class="gallery-item"
@@ -32,7 +38,7 @@ import { gallerySections, galleryImages } from '../../data/gallery';
                 />
               </picture>
               <div class="gallery-overlay">
-                <span class="gallery-zoom">&#43;</span>
+                <span class="gallery-icon">&#43;</span>
               </div>
             </div>
             <div class="gallery-label">
@@ -44,7 +50,7 @@ import { gallerySections, galleryImages } from '../../data/gallery';
 
       <!-- Modal -->
       <div
-        class="carousel-modal"
+        class="modal-overlay"
         x-show="isOpen"
         x-transition:enter="modal-enter"
         x-transition:enter-start="modal-enter-start"
@@ -55,31 +61,39 @@ import { gallerySections, galleryImages } from '../../data/gallery';
         style="display: none;"
         @click.self="close()"
       >
-        <button class="carousel-close" @click="close()" aria-label="Cerrar galería">×</button>
+        <button
+          class="absolute top-4 right-4 text-white text-5xl leading-none p-2 z-[10000] hover:text-[var(--accent-red)] transition-colors duration-200"
+          @click="close()"
+          aria-label="Cerrar galería"
+        >×</button>
 
-        <div class="carousel-content"
+        <div
+          class="flex items-center gap-4 w-full max-w-[90vw] px-2 lg:gap-8"
           @touchstart.passive="touchStartX = $event.touches[0].clientX"
           @touchend.passive="onTouchEnd($event)"
         >
           <button
-            class="carousel-btn carousel-prev"
+            class="carousel-nav-btn"
             @click="prev()"
             :disabled="images.length <= 1"
             aria-label="Imagen anterior"
           >&#10094;</button>
 
-          <div class="carousel-media">
+          <div class="flex-1 relative flex items-center justify-center">
             <img
               :src="images[currentIndex]?.src"
               :alt="images[currentIndex]?.alt"
-              class="carousel-image"
+              class="max-h-[80vh] max-w-full object-contain border border-[var(--gray-light)]"
               loading="lazy"
             />
-            <div class="carousel-counter" x-text="`${currentIndex + 1} / ${images.length}`"></div>
+            <div
+              class="absolute bottom-[-2rem] left-1/2 -translate-x-1/2 text-xs text-white/50 tracking-[0.1em]"
+              x-text="`${currentIndex + 1} / ${images.length}`"
+            ></div>
           </div>
 
           <button
-            class="carousel-btn carousel-next"
+            class="carousel-nav-btn"
             @click="next()"
             :disabled="images.length <= 1"
             aria-label="Imagen siguiente"
@@ -89,250 +103,3 @@ import { gallerySections, galleryImages } from '../../data/gallery';
     </div>
   </div>
 </section>
-
-<script define:vars={{ galleryImages }}>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('gallery', () => ({
-      isOpen: false,
-      images: [],
-      currentIndex: 0,
-      touchStartX: 0,
-
-      open(categoryKey, index) {
-        this.images = galleryImages[categoryKey] || [];
-        this.currentIndex = index;
-        this.isOpen = true;
-        document.body.style.overflow = 'hidden';
-      },
-
-      close() {
-        this.isOpen = false;
-        document.body.style.overflow = '';
-      },
-
-      prev() {
-        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-      },
-
-      next() {
-        this.currentIndex = (this.currentIndex + 1) % this.images.length;
-      },
-
-      onTouchEnd(e) {
-        const diff = this.touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          diff > 0 ? this.next() : this.prev();
-        }
-      },
-    }));
-  });
-</script>
-
-<style>
-  .gallery {
-    background: var(--gray-dark);
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-
-  .gallery .section-title {
-    margin-bottom: 2.5rem;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-
-  .gallery-item {
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .gallery-thumb {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-
-  .gallery-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
-  }
-
-  .gallery-zoom {
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: 300;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  @media (hover: hover) {
-    .gallery-item:hover .gallery-img {
-      transform: scale(1.06);
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      background: rgba(196, 30, 58, 0.35);
-    }
-
-    .gallery-item:hover .gallery-zoom {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .gallery-label {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 0.6rem 1rem;
-    text-align: center;
-  }
-
-  .gallery-label p {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  /* ── Modal ── */
-
-  .carousel-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .carousel-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2.5rem;
-    line-height: 1;
-    padding: 0.5rem;
-    z-index: 10000;
-    transition: color 0.2s ease;
-  }
-
-  .carousel-close:hover {
-    color: var(--accent-red);
-  }
-
-  .carousel-content {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-width: 90vw;
-    padding: 0 0.5rem;
-  }
-
-  .carousel-media {
-    flex: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .carousel-image {
-    max-height: 80vh;
-    max-width: 100%;
-    object-fit: contain;
-    border: 1px solid var(--gray-light);
-  }
-
-  .carousel-counter {
-    position: absolute;
-    bottom: -2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.1em;
-  }
-
-  .carousel-btn {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font-size: 1.25rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .carousel-btn:hover:not(:disabled) {
-    background: var(--accent-red);
-    border-color: var(--accent-red);
-  }
-
-  .carousel-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  /* Modal transitions */
-  .modal-enter { transition: opacity 0.2s ease; }
-  .modal-enter-start { opacity: 0; }
-  .modal-enter-end { opacity: 1; }
-  .modal-leave { transition: opacity 0.2s ease; }
-
-  @media (min-width: 640px) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .gallery-grid {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
-    }
-
-    .gallery {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-    }
-
-    .carousel-content {
-      gap: 2rem;
-    }
-
-    .carousel-btn {
-      width: 3.5rem;
-      height: 3.5rem;
-      font-size: 1.5rem;
-    }
-  }
-</style>

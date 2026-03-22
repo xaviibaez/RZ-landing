@@ -2,14 +2,19 @@
 import { products } from '../../data/products';
 
 const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
+const productsJson = JSON.stringify(productMap);
 ---
 
-<section id="products" class="products" data-analytics="products">
+<section id="products" class="bg-black" data-analytics="products">
   <div class="container-fluid">
-    <h2 class="section-title reveal-text center">PRODUCTOS</h2>
+    <h2 class="section-title reveal-text center mb-10">PRODUCTOS</h2>
 
-    <div x-data="productsCarousel()" @keydown.escape.window="close()">
-      <div class="gallery-grid">
+    <div
+      x-data="productsCarousel()"
+      data-products={productsJson}
+      @keydown.escape.window="close()"
+    >
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6 lg:gap-4">
         {products.map((product) => (
           <div
             class="gallery-item"
@@ -33,7 +38,7 @@ const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
                 />
               </picture>
               <div class="gallery-overlay">
-                <span class="play-icon">&#9654;</span>
+                <span class="gallery-icon">&#9654;</span>
               </div>
             </div>
             <div class="gallery-label">
@@ -45,16 +50,20 @@ const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
 
       <!-- Video Modal -->
       <div
-        class="carousel-modal"
+        class="modal-overlay"
         x-show="isOpen"
         style="display: none;"
         @click.self="close()"
       >
-        <button class="carousel-close" @click="close()" aria-label="Cerrar vídeo">×</button>
+        <button
+          class="absolute top-4 right-4 text-white text-5xl leading-none p-2 z-[10000] hover:text-[var(--accent-red)] transition-colors duration-200"
+          @click="close()"
+          aria-label="Cerrar vídeo"
+        >×</button>
 
-        <div class="video-modal-content">
+        <div class="w-full max-w-[min(90vw,480px)] px-4">
           <template x-if="currentVideo">
-            <div class="video-wrapper">
+            <div class="flex flex-col items-center gap-4">
               <video
                 :src="currentVideo.src"
                 autoplay
@@ -62,7 +71,7 @@ const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
                 loop
                 playsinline
                 controls
-                class="product-video"
+                class="w-full max-h-[70vh] object-contain border border-[var(--gray-light)]"
               ></video>
               <a
                 :href="currentVideo.instagramUrl"
@@ -79,199 +88,3 @@ const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
     </div>
   </div>
 </section>
-
-<script define:vars={{ productMap }}>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('productsCarousel', () => ({
-      isOpen: false,
-      currentVideo: null,
-
-      open(productId) {
-        const video = productMap[productId];
-        if (video) {
-          this.currentVideo = video;
-          this.isOpen = true;
-          document.body.style.overflow = 'hidden';
-        }
-      },
-
-      close() {
-        this.isOpen = false;
-        this.currentVideo = null;
-        document.body.style.overflow = '';
-      },
-    }));
-  });
-</script>
-
-<style>
-  .products {
-    background: #000;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-
-  .products .section-title {
-    margin-bottom: 2.5rem;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-
-  .gallery-item {
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .gallery-thumb {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-
-  .gallery-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
-  }
-
-  .play-icon {
-    color: #fff;
-    font-size: 2.5rem;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  @media (hover: hover) {
-    .gallery-item:hover .gallery-img {
-      transform: scale(1.06);
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      background: rgba(196, 30, 58, 0.4);
-    }
-
-    .gallery-item:hover .play-icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .gallery-label {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 0.6rem 1rem;
-    text-align: center;
-  }
-
-  .gallery-label p {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  /* ── Modal ── */
-
-  .carousel-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .carousel-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2.5rem;
-    line-height: 1;
-    padding: 0.5rem;
-    z-index: 10000;
-    transition: color 0.2s ease;
-  }
-
-  .carousel-close:hover {
-    color: var(--accent-red);
-  }
-
-  .video-modal-content {
-    width: 100%;
-    max-width: min(90vw, 480px);
-    padding: 0 1rem;
-  }
-
-  .video-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .product-video {
-    width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-    border: 1px solid var(--gray-light);
-  }
-
-  .instagram-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    transition: opacity 0.2s ease;
-  }
-
-  .instagram-btn:hover {
-    opacity: 0.9;
-  }
-
-  @media (min-width: 640px) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .gallery-grid {
-      grid-template-columns: repeat(6, 1fr);
-      gap: 1rem;
-    }
-
-    .products {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-    }
-  }
-</style>
