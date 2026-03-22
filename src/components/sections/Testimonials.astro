@@ -19,7 +19,7 @@ import { testimonials } from '../../data/testimonials';
           <div
             class="testimonial-card"
             :class={`{ 'active': current === ${i} }`}
-            aria-hidden={`current !== ${i}`}
+            :aria-hidden={`current !== ${i}`}
           >
             <blockquote class="text-[clamp(0.875rem,2vw,1rem)] leading-[1.8] text-white/85 italic" style="quotes: none">{t.text}</blockquote>
             <div class="flex flex-col gap-1">

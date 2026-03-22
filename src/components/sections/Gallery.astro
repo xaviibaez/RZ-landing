@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { gallerySections, galleryImages } from '../../data/gallery';
 
 const imagesJson = JSON.stringify(galleryImages);
@@ -28,13 +29,12 @@ const imagesJson = JSON.stringify(galleryImages);
               <picture>
                 <source srcset={section.thumbnail.srcAvif} type="image/avif" />
                 <source srcset={section.thumbnail.srcWebp} type="image/webp" />
-                <img
+                <Image
                   src={section.thumbnail.src}
                   alt={section.thumbnail.alt}
                   class="gallery-img"
-                  loading="lazy"
-                  width="400"
-                  height="400"
+                  width={400}
+                  height={400}
                 />
               </picture>
               <div class="gallery-overlay">

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { products } from '../../data/products';
 
 const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
@@ -28,13 +29,12 @@ const productsJson = JSON.stringify(productMap);
               <picture>
                 <source srcset={product.thumbnail.srcAvif} type="image/avif" />
                 <source srcset={product.thumbnail.srcWebp} type="image/webp" />
-                <img
+                <Image
                   src={product.thumbnail.src}
                   alt={product.thumbnail.alt}
                   class="gallery-img"
-                  loading="lazy"
-                  width="400"
-                  height="400"
+                  width={400}
+                  height={400}
                 />
               </picture>
               <div class="gallery-overlay">

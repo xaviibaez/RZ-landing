@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 ---
 
 <section id="about" class="bg-[var(--gray-dark)]">
@@ -41,13 +42,12 @@
         <picture>
           <source srcset="/assets/images/about/lifting-example.avif" type="image/avif" />
           <source srcset="/assets/images/about/lifting-example.webp" type="image/webp" />
-          <img
+          <Image
             src="/assets/images/about/lifting-example.jpg"
             alt="Atleta haciendo peso muerto en competición"
             class="w-full h-auto block"
-            loading="lazy"
-            width="800"
-            height="1000"
+            width={800}
+            height={1000}
           />
         </picture>
         <div class="absolute inset-0 bg-gradient-to-br from-[rgba(196,30,58,0.1)] to-transparent pointer-events-none"></div>
