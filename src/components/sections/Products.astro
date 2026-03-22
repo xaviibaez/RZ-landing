@@ -61,7 +61,7 @@ const productsJson = JSON.stringify(productMap);
           aria-label="Cerrar vídeo"
         >×</button>
 
-        <div class="w-full max-w-[min(90vw,480px)] px-4">
+        <div class="w-full max-w-[min(90vw,720px)] px-4">
           <template x-if="currentVideo">
             <div class="flex flex-col items-center gap-4">
               <video
@@ -71,7 +71,7 @@ const productsJson = JSON.stringify(productMap);
                 loop
                 playsinline
                 controls
-                class="w-full max-h-[70vh] object-contain border border-[var(--gray-light)]"
+                class="w-full max-h-[82vh] object-contain border border-[var(--gray-light)]"
               ></video>
               <a
                 :href="currentVideo.instagramUrl"

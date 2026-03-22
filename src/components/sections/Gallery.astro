@@ -68,7 +68,7 @@ const imagesJson = JSON.stringify(galleryImages);
         >×</button>
 
         <div
-          class="flex flex-col items-center gap-5 w-full max-w-[95vw] lg:max-w-[min(90vw,900px)] px-2"
+          class="flex flex-col items-center gap-5 w-full max-w-[95vw] lg:max-w-[min(95vw,1300px)] px-2"
           @touchstart.passive="onTouchStart($event)"
           @touchmove.passive="onTouchMove($event)"
           @touchend.passive="onTouchEnd($event)"
@@ -88,7 +88,7 @@ const imagesJson = JSON.stringify(galleryImages);
                 :src="images[currentIndex]?.src"
                 :alt="images[currentIndex]?.alt"
                 :style="isDragging ? `transform: translateX(${dragOffset}px); transition: none` : ''"
-                class="max-h-[82vh] w-full object-contain border border-[var(--gray-light)]"
+                class="max-h-[88vh] w-full object-contain border border-[var(--gray-light)]"
                 loading="lazy"
               />
             </div>

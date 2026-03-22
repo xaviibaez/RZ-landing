@@ -388,6 +388,10 @@
     color: rgba(255, 255, 255, 0.85);
   }
 
+  @media (min-width: 1024px) {
+    .gallery-label p { font-size: 0.9rem; }
+  }
+
   /* Service card */
   .service-card {
     position: relative;
