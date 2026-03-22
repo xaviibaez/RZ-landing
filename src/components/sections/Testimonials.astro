@@ -1,0 +1,181 @@
+---
+import { testimonials } from '../../data/testimonials';
+---
+
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <h2 class="section-title reveal-text center">LO QUE DICEN NUESTROS ATLETAS</h2>
+
+    <div
+      x-data="testimonials()"
+      x-init="init()"
+      @destroy="destroy()"
+      class="testimonials-wrapper"
+    >
+      <div class="testimonials-track">
+        {testimonials.map((t, i) => (
+          <div
+            class="testimonial-card"
+            :class={`{ 'active': current === ${i} }`}
+            aria-hidden={`current !== ${i}`}
+          >
+            <blockquote class="testimonial-text">{t.text}</blockquote>
+            <div class="testimonial-author">
+              <span class="author-name">{t.author}</span>
+              <span class="author-role">{t.role}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="testimonial-controls">
+        <button class="testimonial-btn" @click="prev()" aria-label="Testimonio anterior">←</button>
+
+        <div class="testimonial-dots" role="tablist">
+          {testimonials.map((_, i) => (
+            <button
+              class="dot"
+              :class={`{ 'active': current === ${i} }`}
+              @click={`goTo(${i})`}
+              role="tab"
+              :aria-selected={`current === ${i}`}
+              :aria-label={`Testimonio ${i + 1}`}
+            ></button>
+          ))}
+        </div>
+
+        <button class="testimonial-btn" @click="next()" aria-label="Testimonio siguiente">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--gray-dark);
+  }
+
+  .testimonials .section-title {
+    margin-bottom: 2.5rem;
+  }
+
+  .testimonials-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .testimonials-track {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+  }
+
+  .testimonial-card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--gray-medium);
+    border: 1px solid var(--gray-light);
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .testimonial-card.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .testimonial-text {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+    quotes: none;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .author-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+  }
+
+  .author-role {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .testimonial-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    padding-top: 0.5rem;
+  }
+
+  .testimonial-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+
+  .testimonial-btn:hover {
+    background: var(--accent-red);
+    border-color: var(--accent-red);
+    color: #fff;
+  }
+
+  .testimonial-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--accent-gold);
+    transform: scale(1.3);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-track {
+      min-height: 240px;
+    }
+
+    .testimonial-card {
+      padding: 2.5rem;
+    }
+  }
+</style>

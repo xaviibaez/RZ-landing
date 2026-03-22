@@ -1,0 +1,212 @@
+---
+---
+
+<nav
+  x-data="navbar()"
+  @scroll.window="handleScroll()"
+  :class="{ 'scrolled': scrolled, 'nav-hidden': hidden }"
+  class="navbar"
+>
+  <div class="nav-container">
+    <a href="#hero" class="logo">
+      <img
+        src="/assets/images/rz-powerhouse-logo-negative.png"
+        alt="RZ Power House - Gimnasio Powerlifting Sabadell"
+        class="logo-img"
+        width="200"
+        height="50"
+      />
+    </a>
+
+    <ul class="nav-menu" :class="{ 'active': open }">
+      <li><a href="#hero" class="nav-link" @click="open = false">Inicio</a></li>
+      <li><a href="#about" class="nav-link" @click="open = false">Nosotros</a></li>
+      <li><a href="#services" class="nav-link" @click="open = false">Servicios</a></li>
+      <li><a href="#gallery" class="nav-link" @click="open = false">Galería</a></li>
+      <li><a href="#products" class="nav-link" @click="open = false">Productos</a></li>
+      <li><a href="#testimonials" class="nav-link" @click="open = false">Opiniones</a></li>
+      <li><a href="#contact" class="nav-link" @click="open = false">Contacto</a></li>
+    </ul>
+
+    <button
+      class="hamburger"
+      :class="{ 'active': open }"
+      @click="open = !open"
+      :aria-expanded="open"
+      aria-label="Abrir menú de navegación"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Overlay for mobile menu -->
+<div
+  x-data
+  x-show="$store.nav?.open"
+  class="nav-overlay"
+  @click="$dispatch('close-nav')"
+  style="display: none;"
+></div>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.25rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .navbar.nav-hidden {
+    transform: translateY(-100%);
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .logo-img {
+    height: 36px;
+    width: auto;
+  }
+
+  /* ── Mobile nav (default) ── */
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    background: #000;
+    border-left: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    padding: 2rem;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--accent-gold);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* ── Hamburger ── */
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    z-index: 1002;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── Desktop (md+) ── */
+
+  @media (min-width: 768px) {
+    .navbar {
+      padding: 1rem 0;
+    }
+
+    .logo-img {
+      height: 40px;
+    }
+
+    .nav-menu {
+      position: static;
+      width: auto;
+      max-width: none;
+      height: auto;
+      background: transparent;
+      border: none;
+      flex-direction: row;
+      gap: 2rem;
+      padding: 0;
+      transform: none !important;
+      right: auto !important;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+    }
+
+    .hamburger {
+      display: none;
+    }
+  }
+</style>

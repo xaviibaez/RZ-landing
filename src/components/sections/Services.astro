@@ -1,0 +1,101 @@
+---
+import { services } from '../../data/services';
+---
+
+<section id="services" class="services">
+  <div class="container">
+    <h2 class="section-title reveal-text center">NUESTROS SERVICIOS</h2>
+    <div class="services-grid">
+      {services.map((service, i) => (
+        <div class="service-card" style={`animation-delay: ${i * 80}ms`}>
+          <div class="service-icon" aria-hidden="true">◆</div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: #000;
+  }
+
+  .services .section-title {
+    margin-bottom: 2.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .service-card {
+    border: 1px solid var(--gray-light);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--gray-dark);
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-red);
+    transition: width 0.4s ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--accent-red);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(196, 30, 58, 0.15);
+  }
+
+  .service-card:hover::before {
+    width: 100%;
+  }
+
+  .service-icon {
+    color: var(--accent-gold);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card h3 {
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+
+  .service-card p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 640px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card {
+      padding: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,12 @@
+# robots.txt for RZ Power House
+User-agent: *
+Allow: /
+
+# Disallow resource-heavy directories
+Disallow: /assets/videos/
+
+# Sitemap location
+Sitemap: https://rz-landing.vercel.app/sitemap.xml
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1

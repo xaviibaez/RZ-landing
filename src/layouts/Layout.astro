@@ -1,0 +1,174 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'RZ POWER HOUSE - Gimnasio Powerlifting Sabadell | Abierto 24h',
+  description = 'RZ Power House - Gimnasio especializado en Powerlifting en Sabadell. Equipamiento Eleiko, entrenadores profesionales, abierto 24h. Powerlifting, Strongman y Halterofilia. ¡Primera sesión gratis!',
+  image = 'https://www.rzpowerhouse.com/assets/images/openGraph.jpg',
+  canonical = 'https://www.rzpowerhouse.com',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="powerlifting sabadell, gimnasio powerlifting, strongman sabadell, halterofilia, gym 24 horas sabadell, eleiko, entrenamiento fuerza, powerlifting barcelona, gimnasio sabadell, rz power house" />
+    <meta name="author" content="RZ Power House" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="RZ Power House: ¡El Templo del Powerlifting!" />
+    <meta property="og:description" content="Entrena fuerza de verdad: Powerlifting, Halterofilia y Entrenamientos Personalizados. ¡Tu PR te espera aquí!" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RZ Power House" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content="RZ POWER HOUSE - Powerlifting Gym Sabadell" />
+    <meta name="twitter:description" content="El templo del Powerlifting en Sabadell. Equipamiento elite, entrenadores profesionales, abierto 24h. Primera sesión gratis." />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Preload -->
+    <link rel="preload" as="video" href="/assets/videos/hero.mp4" />
+    <link rel="preload" as="image" href="/assets/images/rz-powerhouse-logo-negative.png" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png" />
+    <link rel="icon" href="/favicon-512x512.png" sizes="512x512" type="image/png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="RZ Power House" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WDQTLBXQ1"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-6WDQTLBXQ1');
+    </script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsActivityLocation",
+        "name": "RZ Power House",
+        "image": "https://www.rzpowerhouse.com/assets/images/rz-powerhouse-logo-negative.png",
+        "description": "Gimnasio especializado en Powerlifting, Strongman y Halterofilia en Sabadell. Equipamiento Eleiko de competición, entrenadores certificados y comunidad apasionada.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrer de Permanyer, 316",
+          "addressLocality": "Sabadell",
+          "addressRegion": "Barcelona",
+          "postalCode": "08205",
+          "addressCountry": "ES"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "41.54129226104633",
+          "longitude": "2.099175290292432"
+        },
+        "url": "https://www.rzpowerhouse.com",
+        "telephone": "+34677624775",
+        "email": "antoni-10-23@hotmail.com",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
+        },
+        "priceRange": "€€",
+        "sameAs": [
+          "https://www.instagram.com/rzpowerhouse/",
+          "https://www.tiktok.com/@antonirzpower",
+          "https://www.youtube.com/channel/UCJrHJodMPMHErA3_szj_UMQ"
+        ],
+        "amenityFeature": [
+          { "@type": "LocationFeatureSpecification", "name": "Equipamiento Eleiko", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Entrenadores Certificados", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Abierto 24 horas", "value": true }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Scroll reveal observer -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+      );
+
+      document.querySelectorAll('.reveal-text, .fade-in-up').forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+
+    <!-- Analytics events -->
+    <script>
+      const analyticsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const section = entry.target.getAttribute('data-analytics');
+              if (section && typeof gtag !== 'undefined') {
+                gtag('event', 'section_view', { section_name: section });
+              }
+              analyticsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      document.querySelectorAll('[data-analytics]').forEach((el) => {
+        analyticsObserver.observe(el);
+      });
+
+      document.querySelectorAll('[data-track]').forEach((el) => {
+        el.addEventListener('click', () => {
+          const event = el.getAttribute('data-track');
+          if (event && typeof gtag !== 'undefined') {
+            gtag('event', event, { event_category: 'social' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
