@@ -7,35 +7,30 @@ import { Image } from 'astro:assets';
     <h2 class="section-title reveal-text center mb-10">SOBRE NOSOTROS</h2>
     <div class="grid grid-cols-1 gap-10 items-center lg:grid-cols-[1fr_1fr] lg:gap-16">
 
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-6">
         <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
-          Bienvenido a RZ Power House, un espacio dedicado al powerlifting y al entrenamiento de hipertrofia,
-          diseñado para todos los niveles. Ya seas principiante, quieras perfeccionar tu técnica o seas un
-          competidor experimentado, aquí encontrarás el entorno ideal para alcanzar tus metas y superarte
-          día tras día.
+          RZ Power House es un espacio dedicado al powerlifting y al entrenamiento de hipertrofia, diseñado
+          para todos los niveles. Contamos con equipamiento homologado de competición: racks profesionales,
+          discos calibrados, barras olímpicas y maquinaria Hammer Strength de primer nivel.
         </p>
         <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
-          Contamos con equipamiento homologado de powerlifting, que incluye racks de competición, discos
-          calibrados, barras de competición, plataformas de peso muerto y barras especiales, pensado para
-          que entrenes con seguridad y profesionalismo. Además, nuestra amplia gama de maquinaria de
-          hipertrofia cuenta con equipos de una de las marcas más reconocidas del mercado americano:
-          HAMMER STRENGTH, asegurando calidad, durabilidad y resultados óptimos.
+          Nuestro equipo de entrenadores titulados te guiará en cada sesión, desde correcciones técnicas
+          hasta planificación nutricional. En RZ Power House, cada levantamiento cuenta.
         </p>
-        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
-          Nuestro equipo está formado por entrenadores titulados y apasionados, que te guiarán en cada
-          entrenamiento, adaptando los programas a tus necesidades y objetivos. Desde correcciones técnicas
-          y planificación de progresiones hasta consejos sobre recuperación y rendimiento, estamos aquí para
-          ayudarte a sacar el máximo provecho de cada sesión.
-        </p>
-        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
-          En nuestro gimnasio, cada levantamiento cuenta. Creemos en la constancia, la disciplina y en
-          superar los propios límites. Queremos que cada persona que cruce nuestras puertas se sienta
-          acompañada, motivada y en su espacio.
-        </p>
-        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
-          Si buscas un lugar donde entrenar con equipamiento profesional, entrenadores expertos y un
-          ambiente que te inspire, este es tu gimnasio. Aquí no solo levantas pesos, levantas tu potencial.
-        </p>
+        <ul class="fade-in-up grid grid-cols-1 gap-3 sm:grid-cols-2 mt-2">
+          {[
+            'Equipamiento Eleiko homologado',
+            'Entrenadores certificados',
+            'Abierto 24h · 365 días',
+            'Club AEP de competición',
+          ].map((item) => (
+            <li class="flex items-center gap-3 text-[0.875rem] text-white/75">
+              <span class="text-[var(--accent-gold)] font-black text-base leading-none flex-shrink-0">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a href="#contact" class="cta-button fade-in-up self-center mt-2">Primera sesión gratis</a>
       </div>
 
       <div class="relative overflow-hidden border border-[var(--gray-light)]">
