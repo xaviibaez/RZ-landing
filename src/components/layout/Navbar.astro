@@ -22,7 +22,7 @@ import { Image } from 'astro:assets';
 
     <ul
       class="fixed top-0 right-0 translate-x-full w-3/4 max-w-[320px] h-dvh bg-black border-l border-[var(--gray-light)] flex flex-col justify-center items-center gap-8 z-[1001] p-8 overscroll-contain [transition:transform_350ms_cubic-bezier(0.4,0,0.2,1)] md:static md:w-auto md:max-w-none md:h-auto md:bg-transparent md:border-none md:flex-row md:gap-6 md:p-0 md:translate-x-0"
-      :class="{ 'translate-x-0': open }"
+      :class="{ '!translate-x-0': open }"
     >
       <li><a href="#hero"         @click="open = false" class="nav-link-item">Inicio</a></li>
       <li><a href="#about"        @click="open = false" class="nav-link-item">Nosotros</a></li>
