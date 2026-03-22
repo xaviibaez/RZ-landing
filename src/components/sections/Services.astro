@@ -37,7 +37,10 @@ import { services } from '../../data/services';
     padding: 1.75rem;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      border-color var(--t-base),
+      transform var(--t-base),
+      box-shadow var(--t-base);
     background: var(--gray-dark);
   }
 
@@ -52,14 +55,16 @@ import { services } from '../../data/services';
     transition: width 0.4s ease;
   }
 
-  .service-card:hover {
-    border-color: var(--accent-red);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(196, 30, 58, 0.15);
-  }
+  @media (hover: hover) {
+    .service-card:hover {
+      border-color: var(--accent-red);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(196, 30, 58, 0.15);
+    }
 
-  .service-card:hover::before {
-    width: 100%;
+    .service-card:hover::before {
+      width: 100%;
+    }
   }
 
   .service-icon {

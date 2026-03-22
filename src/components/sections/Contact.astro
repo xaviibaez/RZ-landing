@@ -276,16 +276,20 @@
   .form-group select,
   .form-group textarea {
     width: 100%;
+    /* Touch target: mínimo 48px de alto */
+    min-height: 48px;
     padding: 0.875rem 1rem;
     background: var(--gray-medium);
     border: 1px solid var(--gray-light);
     color: #fff;
     font-family: inherit;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
+    font-size: 1rem; /* mínimo 16px en móvil evita zoom en iOS */
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     outline: none;
-    transition: border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color var(--t-base),
+      box-shadow var(--t-base);
     -webkit-appearance: none;
     appearance: none;
   }
@@ -308,8 +312,8 @@
   .form-group select:focus,
   .form-group textarea:focus {
     border-color: var(--accent-gold);
-    transform: scale(1.01);
-    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    /* Sin transform: evita layout shift en móvil */
   }
 
   .form-group input::placeholder,
@@ -363,19 +367,27 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1rem;
+    /* Touch target mínimo 44px */
+    min-height: 44px;
+    padding: 0.625rem 1rem;
     border: 1px solid var(--gray-light);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition:
+      background var(--t-base),
+      border-color var(--t-base),
+      color var(--t-base);
+    touch-action: manipulation;
   }
 
-  .social-link-whatsapp:hover  { background: #25d366; border-color: #25d366; }
-  .social-link-instagram:hover { background: #e1306c; border-color: #e1306c; }
-  .social-link-tiktok:hover    { background: #000; border-color: #fff; }
-  .social-link-youtube:hover   { background: #ff0000; border-color: #ff0000; }
+  @media (hover: hover) {
+    .social-link-whatsapp:hover  { background: #25d366; border-color: #25d366; }
+    .social-link-instagram:hover { background: #e1306c; border-color: #e1306c; }
+    .social-link-tiktok:hover    { background: #000;    border-color: #fff; }
+    .social-link-youtube:hover   { background: #ff0000; border-color: #ff0000; }
+  }
 
   /* ── Colaborators ── */
 

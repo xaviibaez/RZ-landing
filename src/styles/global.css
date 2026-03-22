@@ -1,23 +1,37 @@
 @import "tailwindcss";
 
-@theme {
-  --color-brand-red: #c41e3a;
-  --color-brand-gold: #d4af37;
-  --color-rz-dark: #1a1a1a;
-  --color-rz-medium: #2a2a2a;
-  --color-rz-light: #3a3a3a;
-}
-
-/* ─── Base ─────────────────────────────────────────────────────────────────── */
+/* ─── Design tokens (única fuente de verdad) ────────────────────────────────── */
 
 :root {
-  --accent-red: #c41e3a;
+  /* Brand colors */
+  --accent-red:  #c41e3a;
   --accent-gold: #d4af37;
-  --gray-dark: #1a1a1a;
+
+  /* Grays */
+  --gray-dark:   #1a1a1a;
   --gray-medium: #2a2a2a;
-  --gray-light: #3a3a3a;
+  --gray-light:  #3a3a3a;
+
+  /* Spacing scale */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+
+  /* Typography */
+  --font-sans: Arial, Helvetica, sans-serif;
+
+  /* Transitions (specific, no "all") */
+  --t-fast:   0.2s ease;
+  --t-base:   0.3s ease;
+  --t-slow:   0.5s ease;
+
   color-scheme: dark;
 }
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
 
 *,
 *::before,
@@ -29,15 +43,22 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  /* Previene saltos de scroll en iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   background-color: #000;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+  font-family: var(--font-sans);
+  /* overflow-x en html para no romper position: sticky */
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 img,
@@ -58,47 +79,51 @@ ul {
 button {
   cursor: pointer;
   font-family: inherit;
+  background: none;
+  border: none;
 }
 
-/* ─── Containers ────────────────────────────────────────────────────────────── */
+/* ─── Focus visible (accesibilidad teclado) ─────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* ─── Contenedores ──────────────────────────────────────────────────────────── */
 
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding: 0 2rem;
-  }
+  margin-inline: auto;
+  padding-inline: var(--space-sm);
 }
 
 .container-fluid {
   width: 100%;
-  padding: 0 1rem;
+  padding-inline: var(--space-sm);
 }
 
 @media (min-width: 768px) {
+  .container,
   .container-fluid {
-    padding: 0 2rem;
+    padding-inline: 2rem;
   }
 }
 
-/* ─── Section Layout ────────────────────────────────────────────────────────── */
+/* ─── Secciones ─────────────────────────────────────────────────────────────── */
 
 section {
-  padding: 4rem 0;
+  padding-block: var(--space-xl);
 }
 
 @media (min-width: 768px) {
   section {
-    padding: 6rem 0;
+    padding-block: var(--space-2xl);
   }
 }
 
-/* ─── Typography ────────────────────────────────────────────────────────────── */
+/* ─── Tipografía ─────────────────────────────────────────────────────────────── */
 
 .section-title {
   font-size: clamp(1.75rem, 5vw, 3.5rem);
@@ -106,7 +131,6 @@ section {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1.1;
-  margin-bottom: 0.5rem;
 }
 
 .section-title::after {
@@ -118,12 +142,15 @@ section {
   margin-top: 0.75rem;
 }
 
-.section-title.center::after {
-  margin-left: auto;
-  margin-right: auto;
+.section-title.center {
+  text-align: center;
 }
 
-/* ─── Buttons ───────────────────────────────────────────────────────────────── */
+.section-title.center::after {
+  margin-inline: auto;
+}
+
+/* ─── Botones ────────────────────────────────────────────────────────────────── */
 
 .cta-button {
   display: inline-block;
@@ -135,14 +162,16 @@ section {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   border: 2px solid var(--accent-red);
-  transition: background 0.3s ease, color 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  transition:
+    background var(--t-base),
+    color var(--t-base);
 }
 
-.cta-button:hover {
-  background: transparent;
-  color: var(--accent-red);
+@media (hover: hover) {
+  .cta-button:hover {
+    background: transparent;
+    color: var(--accent-red);
+  }
 }
 
 .submit-btn {
@@ -155,25 +184,34 @@ section {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   border: 2px solid var(--accent-red);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background var(--t-base),
+    color var(--t-base),
+    opacity var(--t-base);
+  /* Touch target mínimo */
+  min-height: 48px;
 }
 
-.submit-btn:hover:not(:disabled) {
-  background: transparent;
-  color: var(--accent-red);
+@media (hover: hover) {
+  .submit-btn:hover:not(:disabled) {
+    background: transparent;
+    color: var(--accent-red);
+  }
 }
 
 .submit-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* ─── Scroll Animations ─────────────────────────────────────────────────────── */
+/* ─── Animaciones de scroll ─────────────────────────────────────────────────── */
 
 .reveal-text {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .reveal-text.visible {
@@ -184,7 +222,9 @@ section {
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .fade-in-up.visible {
@@ -192,7 +232,7 @@ section {
   transform: translateY(0);
 }
 
-/* ─── Hero Animations ───────────────────────────────────────────────────────── */
+/* ─── Animaciones del hero ───────────────────────────────────────────────────── */
 
 @keyframes wordSlideUp {
   from {
@@ -222,17 +262,15 @@ section {
 
 .hero-subtitle-anim {
   opacity: 0;
-  animation: fadeIn 0.8s ease forwards;
-  animation-delay: 1.2s;
+  animation: fadeIn 0.8s ease forwards 1.2s;
 }
 
 .hero-cta-anim {
   opacity: 0;
-  animation: fadeIn 0.8s ease forwards;
-  animation-delay: 1.5s;
+  animation: fadeIn 0.8s ease forwards 1.5s;
 }
 
-/* ─── WhatsApp Float ────────────────────────────────────────────────────────── */
+/* ─── WhatsApp float ─────────────────────────────────────────────────────────── */
 
 .whatsapp-float {
   position: fixed;
@@ -247,10 +285,42 @@ section {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform var(--t-base),
+    box-shadow var(--t-base);
+  /* Accesibilidad: área táctil suficiente */
+  touch-action: manipulation;
 }
 
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+@media (hover: hover) {
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+  }
+}
+
+/* ─── Respeto al movimiento reducido ────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-text,
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-word,
+  .hero-subtitle-anim,
+  .hero-cta-anim {
+    opacity: 1;
+    animation: none;
+  }
 }

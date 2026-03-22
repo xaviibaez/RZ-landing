@@ -158,17 +158,19 @@ const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  .gallery-item:hover .gallery-img {
-    transform: scale(1.06);
-  }
+  @media (hover: hover) {
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.06);
+    }
 
-  .gallery-item:hover .gallery-overlay {
-    background: rgba(196, 30, 58, 0.4);
-  }
+    .gallery-item:hover .gallery-overlay {
+      background: rgba(196, 30, 58, 0.4);
+    }
 
-  .gallery-item:hover .play-icon {
-    opacity: 1;
-    transform: scale(1);
+    .gallery-item:hover .play-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   .gallery-label {
