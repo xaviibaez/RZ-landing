@@ -18,16 +18,11 @@
   --gray-dark:   #1a1a1a;
   --gray-medium: #2a2a2a;
   --gray-light:  #3a3a3a;
-  --space-xs:  0.5rem;
   --space-sm:  1rem;
-  --space-md:  1.5rem;
-  --space-lg:  2.5rem;
   --space-xl:  4rem;
   --space-2xl: 6rem;
   --font-sans: Arial, Helvetica, sans-serif;
-  --t-fast: 0.2s ease;
   --t-base: 0.3s ease;
-  --t-slow: 0.5s ease;
   color-scheme: dark;
 }
 
@@ -348,11 +343,9 @@
   .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease;
   }
 
   .gallery-icon {

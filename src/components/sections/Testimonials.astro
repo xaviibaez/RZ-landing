@@ -9,8 +9,6 @@ import { testimonials } from '../../data/testimonials';
     <div
       x-data="testimonials()"
       x-init="init()"
-      @destroy="destroy()"
-      :data-total="total"
       data-total={testimonials.length}
       class="max-w-[800px] mx-auto"
     >
