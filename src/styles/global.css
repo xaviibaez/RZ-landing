@@ -243,7 +243,7 @@
       background var(--t-base),
       padding var(--t-base),
       box-shadow var(--t-base),
-      transform var(--t-base);
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .navbar.scrolled {

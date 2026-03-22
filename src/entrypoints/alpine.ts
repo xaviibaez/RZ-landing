@@ -10,8 +10,12 @@ export default (Alpine: typeof Alpine) => {
     lastScroll: 0 as number,
     handleScroll() {
       const curr = window.scrollY;
-      this.scrolled = curr > 100;
-      this.hidden = curr > 200 && curr > this.lastScroll;
+      this.scrolled = curr > 80;
+      if (curr < this.lastScroll) {
+        this.hidden = false;
+      } else if (curr > 300 && curr - this.lastScroll > 8) {
+        this.hidden = true;
+      }
       this.lastScroll = curr;
     },
   }));
