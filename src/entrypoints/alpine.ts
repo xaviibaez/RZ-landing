@@ -19,9 +19,10 @@ export default (Alpine: typeof Alpine) => {
   // ── Testimonials: auto-rotate slider ─────────────────────────────────────
   Alpine.data('testimonials', () => ({
     current: 0 as number,
-    total: 3 as number,
+    total: 0 as number,
     interval: null as ReturnType<typeof setInterval> | null,
     init() {
+      this.total = parseInt((this.$el as HTMLElement).dataset.total || '0', 10);
       this.interval = setInterval(() => {
         this.current = (this.current + 1) % this.total;
       }, 5000);

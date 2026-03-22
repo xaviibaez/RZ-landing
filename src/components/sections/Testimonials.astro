@@ -10,6 +10,8 @@ import { testimonials } from '../../data/testimonials';
       x-data="testimonials()"
       x-init="init()"
       @destroy="destroy()"
+      :data-total="total"
+      data-total={testimonials.length}
       class="max-w-[800px] mx-auto"
     >
       <div class="relative min-h-[280px] overflow-hidden md:min-h-[240px]">
