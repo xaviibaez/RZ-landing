@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'RZ POWER HOUSE - Gimnasio Powerlifting Sabadell | Abierto 24h',
-  description = 'RZ Power House - Gimnasio especializado en Powerlifting en Sabadell. Equipamiento Eleiko, entrenadores profesionales, abierto 24h. Powerlifting, Strongman y Halterofilia. ¡Primera sesión gratis!',
+  description = 'RZ Power House - Gimnasio especializado en Powerlifting en Sabadell. Entrenadores profesionales, abierto 24h. Powerlifting e Hipertrofia. ¡Primera sesión gratis!',
   image = 'https://www.rzpowerhouse.com/assets/images/openGraph.jpg',
   canonical = 'https://www.rzpowerhouse.com',
 } = Astro.props;
@@ -25,14 +25,14 @@ const {
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="powerlifting sabadell, gimnasio powerlifting, strongman sabadell, halterofilia, gym 24 horas sabadell, eleiko, entrenamiento fuerza, powerlifting barcelona, gimnasio sabadell, rz power house" />
+    <meta name="keywords" content="powerlifting sabadell, gimnasio powerlifting, Hipertrofia, gym 24 horas sabadell, eleiko, entrenamiento fuerza, powerlifting barcelona, gimnasio sabadell, rz power house" />
     <meta name="author" content="RZ Power House" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
     <meta property="og:title" content="RZ Power House: ¡El Templo del Powerlifting!" />
-    <meta property="og:description" content="Entrena fuerza de verdad: Powerlifting, Halterofilia y Entrenamientos Personalizados. ¡Tu PR te espera aquí!" />
+    <meta property="og:description" content="Entrena fuerza de verdad: Powerlifting, Hipertrofia y Entrenamientos Personalizados. ¡Tu PR te espera aquí!" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
     <meta property="og:image:width" content="1200" />
@@ -83,7 +83,7 @@ const {
         "@type": "SportsActivityLocation",
         "name": "RZ Power House",
         "image": "https://www.rzpowerhouse.com/assets/images/rz-powerhouse-logo-negative.png",
-        "description": "Gimnasio especializado en Powerlifting, Strongman y Halterofilia en Sabadell. Equipamiento Eleiko de competición, entrenadores certificados y comunidad apasionada.",
+        "description": "Gimnasio especializado en Powerlifting e Hipertrofia en Sabadell. Equipamiento Eleiko de competición, entrenadores certificados y comunidad apasionada.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Carrer de Permanyer, 316",
@@ -107,6 +107,14 @@ const {
           "closes": "23:59"
         },
         "priceRange": "€€",
+        "hasMap": "https://maps.app.goo.gl/NtYGLrKkmqyefsky5",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5",
+          "worstRating": "1",
+          "reviewCount": "5"
+        },
         "sameAs": [
           "https://www.instagram.com/rzpowerhouse/",
           "https://www.tiktok.com/@antonirzpower",
