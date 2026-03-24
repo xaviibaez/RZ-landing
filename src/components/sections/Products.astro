@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+import { products } from '../../data/products';
+
+const productMap = Object.fromEntries(products.map((p) => [p.id, p.video]));
+const productsJson = JSON.stringify(productMap);
+---
+
+<section id="products" class="bg-black" data-analytics="products">
+  <div class="container-fluid">
+    <h2 class="section-title reveal-text center mb-10">TIENDA</h2>
+
+    <div
+      x-data="productsCarousel()"
+      data-products={productsJson}
+      @keydown.escape.window="close()"
+    >
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6 lg:gap-4">
+        {products.map((product) => (
+          <div
+            class="gallery-item"
+            @click={`open('${product.id}')`}
+            role="button"
+            tabindex="0"
+            aria-label={`Ver producto: ${product.label}`}
+            @keydown.enter={`open('${product.id}')`}
+          >
+            <div class="gallery-thumb">
+              <picture>
+                <source srcset={product.thumbnail.srcAvif} type="image/avif" />
+                <source srcset={product.thumbnail.srcWebp} type="image/webp" />
+                <Image
+                  src={product.thumbnail.src}
+                  alt={product.thumbnail.alt}
+                  class="gallery-img"
+                  width={400}
+                  height={400}
+                />
+              </picture>
+              <div class="gallery-overlay">
+                <span class="gallery-icon">&#9654;</span>
+              </div>
+            </div>
+            <div class="gallery-label">
+              <p>{product.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Video Modal -->
+      <div
+        class="modal-overlay"
+        x-show="isOpen"
+        style="display: none;"
+        @click.self="close()"
+      >
+        <button
+          class="absolute top-4 right-4 text-white text-5xl leading-none p-2 z-[10000] hover:text-[var(--accent-red)] transition-colors duration-200"
+          @click="close()"
+          aria-label="Cerrar vídeo"
+        >×</button>
+
+        <div class="w-full max-w-[min(90vw,720px)] px-4">
+          <template x-if="currentVideo">
+            <div class="flex flex-col items-center gap-4">
+              <video
+                :src="currentVideo.src"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                class="w-full max-h-[82vh] object-contain border border-[var(--gray-light)]"
+              ></video>
+              <a
+                :href="currentVideo.instagramUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="instagram-btn"
+              >
+                Ver en Instagram
+              </a>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

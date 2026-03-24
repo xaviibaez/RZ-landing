@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+---
+
+<section id="about" class="bg-[var(--gray-dark)]">
+  <div class="container">
+    <h2 class="section-title reveal-text center mb-3">SOBRE NOSOTROS</h2>
+    <p class="text-center text-white/45 text-[0.8rem] tracking-[0.15em] uppercase mb-10">Gimnasio de powerlifting en Sabadell</p>
+    <div class="grid grid-cols-1 gap-10 items-center lg:grid-cols-[1fr_1fr] lg:gap-16">
+
+      <div class="flex flex-col gap-6">
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
+          RZ Power House es un gimnasio de powerlifting e hipertrofia en Sabadell, diseñado
+          para todos los niveles. Contamos con equipamiento homologado de competición: racks profesionales,
+          discos calibrados, barras olímpicas y maquinaria Hammer Strength de primer nivel.
+        </p>
+        <p class="fade-in-up text-white/80 leading-[1.8] text-[0.95rem] lg:text-[1.05rem]">
+          Nuestro equipo de entrenadores titulados te guiará en cada sesión, desde correcciones técnicas
+          hasta planificación nutricional. En RZ Power House, cada levantamiento cuenta.
+        </p>
+        <ul class="fade-in-up grid grid-cols-1 gap-3 sm:grid-cols-2 mt-2">
+          {[
+            'Sesiones individuales',
+            'Entrenadores certificados',
+            'Abierto 24h · 365 días',
+            'Club AEP de competición',
+          ].map((item) => (
+            <li class="flex items-center gap-3 text-[0.875rem] text-white/75">
+              <span class="text-[var(--accent-gold)] font-black text-base leading-none flex-shrink-0">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a href="#contact" class="cta-button fade-in-up self-center mt-2">Primera sesión gratis</a>
+      </div>
+
+      <div class="relative overflow-hidden border border-[var(--gray-light)]">
+        <picture>
+          <source srcset="/assets/images/about/lifting-example.avif" type="image/avif" />
+          <source srcset="/assets/images/about/lifting-example.webp" type="image/webp" />
+          <Image
+            src="/assets/images/about/lifting-example.jpg"
+            alt="Atleta haciendo peso muerto en competición"
+            class="w-full h-auto block"
+            width={800}
+            height={1000}
+          />
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(196,30,58,0.1)] to-transparent pointer-events-none"></div>
+      </div>
+
+    </div>
+  </div>
+</section>

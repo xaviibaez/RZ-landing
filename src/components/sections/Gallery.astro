@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import { gallerySections, galleryImages } from '../../data/gallery';
+
+const imagesJson = JSON.stringify(galleryImages);
+---
+
+<section id="gallery" class="bg-[var(--gray-dark)]" data-analytics="gallery">
+  <div class="container-fluid">
+    <h2 class="section-title reveal-text center mb-10">EL TEMPLO</h2>
+
+    <div
+      x-data="gallery()"
+      data-images={imagesJson}
+      @keydown.escape.window="close()"
+    >
+      <!-- Thumbnails grid -->
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5 lg:gap-4">
+        {gallerySections.map((section) => (
+          <div
+            class="gallery-item"
+            @click={`open('${section.key}', 0)`}
+            role="button"
+            tabindex="0"
+            aria-label={`Ver galería: ${section.label}`}
+            @keydown.enter={`open('${section.key}', 0)`}
+          >
+            <div class="gallery-thumb">
+              <picture>
+                <source srcset={section.thumbnail.srcAvif} type="image/avif" />
+                <source srcset={section.thumbnail.srcWebp} type="image/webp" />
+                <Image
+                  src={section.thumbnail.src}
+                  alt={section.thumbnail.alt}
+                  class="gallery-img"
+                  width={400}
+                  height={400}
+                />
+              </picture>
+              <div class="gallery-overlay">
+                <span class="gallery-icon">&#43;</span>
+              </div>
+            </div>
+            <div class="gallery-label">
+              <p>{section.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal-overlay"
+        x-show="isOpen"
+        x-transition:enter="modal-enter"
+        x-transition:enter-start="modal-enter-start"
+        x-transition:enter-end="modal-enter-end"
+        x-transition:leave="modal-leave"
+        x-transition:leave-start="modal-enter-end"
+        x-transition:leave-end="modal-enter-start"
+        style="display: none;"
+        @click.self="close()"
+      >
+        <button
+          class="absolute top-4 right-4 text-white text-5xl leading-none p-2 z-[10000] hover:text-[var(--accent-red)] transition-colors duration-200"
+          @click="close()"
+          aria-label="Cerrar galería"
+        >×</button>
+
+        <div
+          class="flex flex-col items-center gap-5 w-full max-w-[95vw] lg:max-w-[min(95vw,1300px)] px-2"
+          @touchstart.passive="onTouchStart($event)"
+          @touchmove.passive="onTouchMove($event)"
+          @touchend.passive="onTouchEnd($event)"
+        >
+          <!-- Image row: side buttons only on desktop -->
+          <div class="flex items-center gap-4 w-full lg:gap-8">
+            <button
+              class="hidden lg:flex carousel-nav-btn shrink-0"
+              @click="prev()"
+              :disabled="images.length <= 1"
+              aria-label="Imagen anterior"
+            >&#10094;</button>
+
+            <div class="flex-1 overflow-hidden">
+              <img
+                x-ref="carouselImg"
+                :src="images[currentIndex]?.src"
+                :alt="images[currentIndex]?.alt"
+                :style="isDragging ? `transform: translateX(${dragOffset}px); transition: none` : ''"
+                class="max-h-[88vh] w-full object-contain border border-[var(--gray-light)]"
+                loading="lazy"
+              />
+            </div>
+
+            <button
+              class="hidden lg:flex carousel-nav-btn shrink-0"
+              @click="next()"
+              :disabled="images.length <= 1"
+              aria-label="Imagen siguiente"
+            >&#10095;</button>
+          </div>
+
+          <!-- Counter -->
+          <span
+            class="text-xs text-white/50 tracking-[0.1em]"
+            x-text="`${currentIndex + 1} / ${images.length}`"
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

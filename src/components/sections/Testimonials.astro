@@ -1,0 +1,65 @@
+---
+import { testimonials } from '../../data/testimonials';
+---
+
+<section id="testimonials" class="bg-[var(--gray-dark)]">
+  <div class="container">
+    <h2 class="section-title reveal-text center mb-8">LO QUE DICEN NUESTROS ATLETAS</h2>
+
+    <div class="flex items-center justify-center gap-3 mb-10">
+      <div class="text-[var(--accent-gold)] text-xl leading-none tracking-[-0.05em]">★★★★★</div>
+      <span class="text-white font-black text-lg">5.0</span>
+      <span class="text-white/35 text-sm">· Google Reviews</span>
+    </div>
+
+    <div
+      x-data="testimonials()"
+      x-init="init()"
+      data-total={testimonials.length}
+      class="max-w-[800px] mx-auto"
+    >
+      <div class="relative min-h-[280px] overflow-hidden md:min-h-[240px]">
+        {testimonials.map((t, i) => (
+          <div
+            class="testimonial-card"
+            :class={`{ 'active': current === ${i} }`}
+            :aria-hidden={`current !== ${i}`}
+          >
+            <blockquote class="text-[clamp(0.875rem,2vw,1rem)] leading-[1.8] text-white/85 italic" style="quotes: none">{t.text}</blockquote>
+            <div class="flex flex-col gap-1">
+              <span class="font-bold text-[0.9rem] tracking-[0.05em] uppercase text-[var(--accent-gold)]">{t.author}</span>
+              <span class="text-xs text-white/45 tracking-[0.08em] uppercase">{t.role}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex items-center justify-center gap-6 mt-5 pt-2">
+        <button
+          class="border border-white/20 text-white/60 w-11 h-11 flex items-center justify-center text-base transition-[background,border-color,color] hover-safe:bg-white/10 hover-safe:border-white/40 hover-safe:text-white touch-manipulation"
+          @click="prev()"
+          aria-label="Testimonio anterior"
+        >←</button>
+
+        <div class="flex gap-1" role="tablist">
+          {testimonials.map((_, i) => (
+            <button
+              class="slider-dot"
+              :class={`{ 'active': current === ${i} }`}
+              @click={`goTo(${i})`}
+              role="tab"
+              :aria-selected={`current === ${i}`}
+              :aria-label={`Testimonio ${i + 1}`}
+            ></button>
+          ))}
+        </div>
+
+        <button
+          class="border border-white/20 text-white/60 w-11 h-11 flex items-center justify-center text-base transition-[background,border-color,color] hover-safe:bg-white/10 hover-safe:border-white/40 hover-safe:text-white touch-manipulation"
+          @click="next()"
+          aria-label="Testimonio siguiente"
+        >→</button>
+      </div>
+    </div>
+  </div>
+</section>

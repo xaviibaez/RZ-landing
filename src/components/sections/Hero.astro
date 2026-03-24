@@ -1,0 +1,36 @@
+---
+---
+
+<section id="hero" class="relative h-svh min-h-[500px] flex items-center justify-center overflow-hidden py-0">
+  <video
+    class="absolute inset-0 w-full h-full object-cover z-0"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster="/assets/images/hero-poster.jpg"
+  >
+    <source src="/assets/videos/hero.webm" type="video/webm" />
+    <source src="/assets/videos/hero.mp4" type="video/mp4" />
+  </video>
+
+  <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/65 to-black/80 z-[1]"></div>
+
+  <div class="relative z-[2] text-center px-5 flex flex-col items-center gap-5">
+    <h1 class="font-black uppercase leading-[1.05] tracking-[0.06em] text-[clamp(2.25rem,10vw,8rem)] flex flex-wrap justify-center gap-[0.25em]">
+      <span class="hero-word">ENAMÓRATE</span>
+      <span class="hero-word">DEL</span>
+      <span class="hero-word">PROCESO</span>
+    </h1>
+    <p class="hero-subtitle-anim font-semibold uppercase tracking-[0.3em] text-[clamp(0.875rem,2.5vw,1.25rem)] text-[var(--accent-gold)]">
+      EL TEMPLO DEL POWERLIFTING
+    </p>
+    <div class="flex flex-col items-center gap-3 hero-cta-anim">
+      <a href="#contact" class="cta-button">ÚNETE AHORA</a>
+      <div class="flex items-center gap-2 text-[0.7rem] font-semibold tracking-[0.15em] uppercase text-white/50">
+        Abierto 24h · 365 días
+      </div>
+    </div>
+  </div>
+</section>
